@@ -44,7 +44,7 @@ export function AboutSection() {
               transition={{ duration: 0.6, ease: "easeOut" }}
               className="text-xs font-mono text-emerald-400/70 tracking-[0.2em] uppercase mb-6"
             >
-              / About FlowLink
+              / About Thia-Term
             </motion.p>
             <motion.h2
               initial={{ opacity: 0, y: 30 }}
@@ -63,7 +63,7 @@ export function AboutSection() {
               className="text-white/45 leading-relaxed mb-10 text-base"
             >
               As AI agents become economic actors, they need payment infrastructure
-              that builds trust over time. FlowLink records every transaction on
+              that builds trust over time. Thia-Term records every transaction on
               HashKey Chain, the only regulated blockchain for institutional finance,
               creating a reputation layer that agents carry into every interaction.
             </motion.p>
