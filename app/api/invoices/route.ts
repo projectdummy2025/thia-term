@@ -211,7 +211,7 @@ export async function POST(request: NextRequest) {
 
   if (status === 'pending') {
     try {
-      const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://flowlink.ink'
+      const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
       const token = (currency as 'USDC' | 'USDT' | 'HSK') || 'USDC'
       const mandate = await hspClient.createSinglePayMandate({
         merchant_order_id: invoice.id,
@@ -265,7 +265,7 @@ export async function POST(request: NextRequest) {
       currency,
       issuedTo: body.issuedTo ?? null,
       dueAt: invoice.dueAt?.toISOString() ?? null,
-      paymentLink: paymentLinkCode ? `${process.env.NEXT_PUBLIC_APP_URL ?? 'https://flowlink.ink'}/l/${paymentLinkCode}` : null,
+      paymentLink: paymentLinkCode ? `${process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000'}/l/${paymentLinkCode}` : null,
     }).catch(e => console.error('[email] invoice created:', e))
   }
 
