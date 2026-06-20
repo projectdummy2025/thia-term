@@ -513,7 +513,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
         <div className="p-5 border-b border-white/[0.05]">
           <div className="flex items-center gap-2.5">
             <div className="w-9 h-9 rounded-xl overflow-hidden shadow-lg shadow-emerald-900/40 ring-1 ring-emerald-500/20">
-              <img src="/ai-assistant-icon.png" alt="FlowLink" className="w-full h-full object-cover" />
+              <img src="/ai-assistant-icon.png" alt="Thia-Term" className="w-full h-full object-cover" />
             </div>
             <span className="font-bold text-xl tracking-tight">
               <span className="text-white">Flow</span><span className="text-emerald-400">Link</span>
