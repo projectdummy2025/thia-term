@@ -22,9 +22,9 @@ export default function Header() {
 
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
-            <img src="/flowlink-logo-final.png" alt="FlowLink" className="w-9 h-9 rounded-xl object-cover" />
+            <img src="/thia-term-logo.png" alt="Thia-Term" className="w-9 h-9 rounded-xl object-cover" />
             <span className="font-bold text-xl tracking-tight">
-              <span className="text-slate-900">Flow</span><span className="text-emerald-600">Link</span>
+              <span className="text-slate-900">Thia</span><span className="text-emerald-600">-Term</span>
             </span>
           </Link>
 
