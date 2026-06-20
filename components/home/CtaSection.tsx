@@ -37,7 +37,7 @@ export default function CtaSection() {
             Start getting paid on-chain
           </motion.h2>
           <motion.p className="text-lg text-white/80" variants={itemVariants}>
-            FlowLink is live on HashKey Chain Mainnet. Create a payment link, go through the full KYC and sanctions flow, and watch settlement happen on-chain in seconds.
+            Thia-Term is live on HashKey Chain Mainnet. Create a payment link, go through the full KYC and sanctions flow, and watch settlement happen on-chain in seconds.
           </motion.p>
 
           <motion.div variants={itemVariants}>
