@@ -169,10 +169,10 @@ export function InvoicePaymentClient({ invoice, senderName, recipientAddress }: 
         <div className="max-w-lg mx-auto px-4 h-14 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-xl overflow-hidden">
-              <img src="/ai-assistant-icon.png" alt="FlowLink" className="w-full h-full object-cover" />
+              <img src="/ai-assistant-icon.png" alt="Thia-Term" className="w-full h-full object-cover" />
             </div>
             <span className="font-bold text-lg tracking-tight">
-              <span className="text-slate-900">Flow</span><span className="text-emerald-600">Link</span>
+              <span className="text-slate-900">Thia</span><span className="text-emerald-600">-Term</span>
             </span>
           </div>
           <div className={`flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full ${cfg.bg} ${cfg.text}`}>
@@ -365,7 +365,7 @@ export function InvoicePaymentClient({ invoice, senderName, recipientAddress }: 
 
             <div className="flex items-center justify-center gap-1.5 text-xs text-slate-400 border-t border-slate-100 pt-4">
               <Lock className="h-3 w-3" />
-              Secured by FlowLink · {targetChain?.name ?? invoice.network}
+              Secured by Thia-Term · {targetChain?.name ?? invoice.network}
             </div>
           </div>
         )}
