@@ -143,7 +143,7 @@ export function WalletSetupModal({ open, onClose }: WalletSetupModalProps) {
               </div>
               <h2 className="text-base font-semibold text-white">Change wallet</h2>
             </div>
-            <p className="text-xs text-white/40 pl-[2.6rem]">Link a new wallet to your FlowLink account.</p>
+            <p className="text-xs text-white/40 pl-[2.6rem]">Link a new wallet to your Thia-Term account.</p>
           </div>
 
           <Tabs defaultValue="managed" className="space-y-4">
@@ -152,7 +152,7 @@ export function WalletSetupModal({ open, onClose }: WalletSetupModalProps) {
                 value="managed"
                 className="rounded-lg text-xs text-white/50 data-[state=active]:bg-emerald-500 data-[state=active]:text-white data-[state=active]:shadow-none py-2"
               >
-                FlowLink Wallet
+                Thia-Term Wallet
               </TabsTrigger>
               <TabsTrigger
                 value="external"
@@ -324,7 +324,7 @@ export function WalletSetupModal({ open, onClose }: WalletSetupModalProps) {
               <div className="rounded-xl bg-white/[0.03] border border-white/8 p-3 flex gap-2.5">
                 <ShieldAlert className="h-4 w-4 text-white/30 shrink-0 mt-0.5" />
                 <p className="text-xs text-white/45 leading-relaxed">
-                  External wallets require MetaMask to be connected for every on-chain action. FlowLink cannot sign transactions automatically on your behalf.
+                  External wallets require MetaMask to be connected for every on-chain action. Thia-Term cannot sign transactions automatically on your behalf.
                 </p>
               </div>
 
