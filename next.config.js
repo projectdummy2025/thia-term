@@ -29,9 +29,6 @@ const nextConfig = {
       },
     ]
   },
-  experimental: {
-    outputFileTracingRoot: undefined,
-  },
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -39,7 +36,6 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   webpack: (config) => {
-    // Suppress MetaMask SDK react-native peer dep warning in browser build
     config.resolve.fallback = {
       ...config.resolve.fallback,
       fs: false,
