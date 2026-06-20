@@ -18,7 +18,7 @@ export default async function InvoicePayPage({ params }: Props) {
 
   // Resolve recipient wallet: user's wallet is where they receive payment
   const recipientAddress = invoice.user.walletAddress ?? null
-  const senderName = invoice.user.name ?? invoice.user.email ?? "FlowLink User"
+  const senderName = invoice.user.name ?? invoice.user.email ?? "Thia-Term User"
 
   return (
     <InvoicePaymentClient
