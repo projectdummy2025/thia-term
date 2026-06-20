@@ -135,7 +135,7 @@ export function WalletOnboardingModal({ open, onClose }: WalletOnboardingModalPr
                   <h2 className="text-lg font-semibold text-white">Set up your wallet</h2>
                 </div>
                 <p className="text-sm text-white/50 pl-[2.6rem]">
-                  To send and receive crypto payments you need a wallet linked to your FlowLink account.
+                  To send and receive crypto payments you need a wallet linked to your Thia-Term account.
                 </p>
               </div>
 
@@ -143,7 +143,7 @@ export function WalletOnboardingModal({ open, onClose }: WalletOnboardingModalPr
               <div className="rounded-xl bg-emerald-400/5 border border-emerald-400/15 p-3.5 flex gap-2.5">
                 <Shield className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
                 <p className="text-xs text-white/60 leading-relaxed">
-                  FlowLink encrypts your key server-side. You won't need to reconnect MetaMask for every payment — the app signs automatically.
+                  Thia-Term encrypts your key server-side. You won't need to reconnect MetaMask for every payment — the app signs automatically.
                 </p>
               </div>
 
@@ -245,7 +245,7 @@ export function WalletOnboardingModal({ open, onClose }: WalletOnboardingModalPr
                 )}
 
                 <p className="text-[10px] text-white/30 leading-relaxed">
-                  Write this down somewhere safe. FlowLink encrypts and stores your key so you can sign transactions without reconnecting — but this phrase is the only way to recover your wallet if you lose access.
+                  Write this down somewhere safe. Thia-Term encrypts and stores your key so you can sign transactions without reconnecting — but this phrase is the only way to recover your wallet if you lose access.
                 </p>
               </div>
 
