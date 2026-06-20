@@ -95,7 +95,7 @@ export async function POST(request: NextRequest) {
   let hspNote: string | undefined
 
   try {
-    const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://flowlink.ink"
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"
     const token = (body.sourceToken as "USDC" | "USDT" | "HSK") || "USDC"
     const mandate = await hspClient.createSinglePayMandate({
       merchant_order_id: link.id,
@@ -104,7 +104,7 @@ export async function POST(request: NextRequest) {
       chain_id: 177, // HashKey Chain mainnet
       webhook_url: `${appUrl}/api/webhooks/hsp`,
       redirect_url: `${appUrl}/l/${link.code}`,
-      description: body.name || `FlowLink Payment ${link.code}`,
+      description: body.name || `Thia-Term Payment ${link.code}`,
     })
 
     if (mandate?.data?.cart_mandate_id) {
