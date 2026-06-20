@@ -42,7 +42,7 @@ export default function SecuritySection() {
             Compliance tools built in
           </h2>
           <p className="text-lg text-slate-500 leading-relaxed">
-            Whether you're a VASP, a treasury desk, or a team navigating crypto payments — FlowLink gives you the screening and audit tools to get started on the right foot.
+            Whether you're a VASP, a treasury desk, or a team navigating crypto payments — Thia-Term gives you the screening and audit tools to get started on the right foot.
           </p>
         </motion.div>
 
