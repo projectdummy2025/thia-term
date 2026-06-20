@@ -115,7 +115,7 @@
 }
 
 .dark {
-  /* Dark teal/slate palette — matches FlowLink dashboard design system */
+  /* Dark teal/slate palette — matches Thia-Term dashboard design system */
   --background: 222 47% 8%;        /* #0f172a */
   --foreground: 210 40% 98%;       /* near-white */
   --card: 222 47% 10%;             /* #131f35 */
