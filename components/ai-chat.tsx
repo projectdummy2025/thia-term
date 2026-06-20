@@ -42,7 +42,7 @@ export default function AiChat({ className }: AiChatProps) {
     {
       id: '1',
       role: 'assistant',
-      content: 'Hello! I\'m your FlowLink AI assistant. I can help you with crypto payments, compliance questions, and platform features. How can I assist you today?',
+      content: 'Hello! I\'m your Thia-Term AI assistant. I can help you with crypto payments, compliance questions, and platform features. How can I assist you today?',
       timestamp: new Date()
     }
   ])
@@ -276,7 +276,7 @@ export default function AiChat({ className }: AiChatProps) {
                     </div>
                   </div>
                   <CardTitle className="text-sm font-semibold text-white animate-fade-in">
-                    FlowLink AI Assistant
+                    Thia-Term AI Assistant
                   </CardTitle>
                   <Badge variant="secondary" className="text-xs bg-emerald-500/10 text-emerald-400 border-emerald-500/20 animate-pulse">
                     <Zap className="h-3 w-3 mr-1 animate-pulse" />
@@ -368,7 +368,7 @@ export default function AiChat({ className }: AiChatProps) {
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
                     onKeyPress={handleKeyPress}
-                    placeholder="Ask me anything about FlowLink..."
+                    placeholder="Ask me anything about Thia-Term..."
                     disabled={isLoading}
                     className="flex-1 bg-slate-800/50 border-slate-700/50 text-slate-200 placeholder:text-slate-400 focus:border-emerald-500/50 transition-all duration-300 focus:scale-105"
                   />
@@ -406,7 +406,7 @@ export default function AiChat({ className }: AiChatProps) {
               <span className="font-semibold text-sm">Hi! I'm your AI Assistant</span>
             </div>
             <p className="text-xs text-emerald-100">
-              I can help you with FlowLink features, crypto payments, and compliance questions. Ask me anything!
+              I can help you with Thia-Term features, crypto payments, and compliance questions. Ask me anything!
             </p>
             {/* Arrow pointing to chat */}
             <div className="absolute -left-2 top-1/2 transform -translate-y-1/2">
