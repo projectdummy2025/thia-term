@@ -38,7 +38,7 @@ const settingsSections = [
       { id: "team" as PanelId, icon: Users, title: "Team", desc: "Manage team roles and permissions." },
       { id: "security" as PanelId, icon: Shield, title: "Team Security", desc: "Manage mandatory team authentication." },
       { id: "subscription" as PanelId, icon: CreditCard, title: "Subscription", desc: "View your current plan, billing history, and available upgrades." },
-      { id: "integrations" as PanelId, icon: Plug, title: "Integrations", desc: "Connect FlowLink to accounting software and other tools." },
+      { id: "integrations" as PanelId, icon: Plug, title: "Integrations", desc: "Connect Thia-Term to accounting software and other tools." },
     ],
   },
   {
@@ -341,7 +341,7 @@ function PersonalDetailsPanel({ onBack }: { onBack: () => void }) {
                 <div className="flex items-center gap-2 mb-0.5">
                   <p className="text-xs text-slate-400 font-medium">Connected wallet</p>
                   {walletType === "managed" ? (
-                    <span className="text-[10px] font-medium px-1.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">FlowLink managed</span>
+                    <span className="text-[10px] font-medium px-1.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Thia-Term managed</span>
                   ) : walletType === "external" ? (
                     <span className="text-[10px] font-medium px-1.5 py-0.5 rounded-full bg-white/[0.04] text-slate-400 border border-white/10">External</span>
                   ) : null}
@@ -724,19 +724,10 @@ function ExportsPanel({ onBack }: { onBack: () => void }) {
   const reports = [
     {
       type: 'statement', label: 'Account Statement', desc: 'Full summary — payments, invoices, links, wallet. Opens as a printable page (save as PDF).', isHtml: true,
-      filename: `flowlink-statement-${new Date().toISOString().split('T')[0]}.html`,
-    },
-    {
-      type: 'payments', label: 'Payments CSV', desc: 'All received payments with amounts, networks, tx hashes and compliance status.', isHtml: false,
-      filename: `flowlink-payments-${new Date().toISOString().split('T')[0]}.csv`,
-    },
-    {
-      type: 'invoices', label: 'Invoices CSV', desc: 'All invoices — numbers, clients, amounts, due dates and payment status.', isHtml: false,
-      filename: `flowlink-invoices-${new Date().toISOString().split('T')[0]}.csv`,
-    },
-    {
-      type: 'payroll', label: 'Payroll CSV', desc: 'All payroll batches and recipients with wallet addresses and tx hashes.', isHtml: false,
-      filename: `flowlink-payroll-${new Date().toISOString().split('T')[0]}.csv`,
+      filename: `thia-term-statement-${new Date().toISOString().split('T')[0]}.html`,
+      filename: `thia-term-payments-${new Date().toISOString().split('T')[0]}.csv`,
+      filename: `thia-term-invoices-${new Date().toISOString().split('T')[0]}.csv`,
+      filename: `thia-term-payroll-${new Date().toISOString().split('T')[0]}.csv`,
     },
   ]
 
