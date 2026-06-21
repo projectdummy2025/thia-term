@@ -9,7 +9,7 @@ const features = [
     num: "01",
     icon: ShieldCheck,
     title: "On-Chain Invoicing",
-    desc: "Create structured invoices and auto-generate shareable payment links. Clients pay in one click, directly on HashKey Chain.",
+    desc: "Create structured invoices and auto-generate shareable payment links. Clients pay in one click via T3N settlement.",
   },
   {
     num: "02",
@@ -27,7 +27,7 @@ const features = [
     num: "04",
     icon: TrendingUp,
     title: "HSP Payment Mandates",
-    desc: "Built natively on HashKey Settlement Protocol for trustless, institutional-grade payment authorization.",
+    desc: "Built on T3N for trustless, institutional-grade payment authorization.",
   },
 ]
 
