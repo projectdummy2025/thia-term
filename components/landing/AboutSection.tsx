@@ -7,7 +7,7 @@ import { ArrowRight } from "lucide-react"
 
 
 const stats = [
-  { label: "Built on HashKey Chain" },
+  { label: "Powered by T3N" },
   { label: "Agent-to-Agent Ready" },
   { label: "ProofLink Verified" },
 ]
@@ -63,9 +63,8 @@ export function AboutSection() {
               className="text-white/45 leading-relaxed mb-10 text-base"
             >
               As AI agents become economic actors, they need payment infrastructure
-              that builds trust over time. Thia-Term records every transaction on
-              HashKey Chain, the only regulated blockchain for institutional finance,
-              creating a reputation layer that agents carry into every interaction.
+              that builds trust over time. Thia-Term processes every transaction through
+              T3N, creating a reputation layer that agents carry into every interaction.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
