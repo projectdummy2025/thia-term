@@ -11,7 +11,7 @@ const layers = [
     tagStyle: "bg-emerald-500/20 text-emerald-400 border-emerald-500/30",
     live: true,
     dim: false,
-    desc: "Create invoices, generate payment links, and receive stablecoin payments on HashKey Chain. Every settled payment is recorded on-chain and contributes to your verifiable payment reputation.",
+    desc: "Create invoices, generate payment links, and receive stablecoin payments via T3N. Every settled payment is recorded on-chain and contributes to your verifiable payment reputation.",
   },
   {
     num: "02",
