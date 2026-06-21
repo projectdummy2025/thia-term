@@ -21,8 +21,6 @@ import { VendorsModule } from "@/components/vendors-module"
 import { WalletSetupModal } from "@/components/wallet-setup-modal"
 import { WalletOnboardingModal } from "@/components/wallet-onboarding-modal"
 import { useSession, signOut } from "next-auth/react"
-import { useAccount } from "wagmi"
-import { ConnectButton } from "@rainbow-me/rainbowkit"
 import { cn } from "@/lib/utils"
 
 interface DashboardLayoutProps {
@@ -209,7 +207,6 @@ function WalletBanner({ onSetup }: { onSetup: () => void }) {
 
 function ProfileDialog({ open, onClose }: { open: boolean; onClose: () => void }) {
   const { data: session, update } = useSession()
-  const { address, isConnected } = useAccount()
   const [saving, setSaving] = useState(false)
   const [uploadingAvatar, setUploadingAvatar] = useState(false)
   const [msg, setMsg] = useState("")
@@ -272,30 +269,6 @@ function ProfileDialog({ open, onClose }: { open: boolean; onClose: () => void }
     } finally {
       setSaving(false)
       setUploadingAvatar(false)
-    }
-  }
-
-  const linkWallet = async () => {
-    if (!address) return
-    setSaving(true)
-    setMsg("")
-    try {
-      const res = await fetch('/api/user', {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ walletAddress: address }),
-      })
-      const data = await res.json()
-      if (data.success) {
-        await update({ walletAddress: data.data?.walletAddress ?? address.toLowerCase() })
-        setMsg("Wallet linked successfully.")
-      } else {
-        setMsg(data.error ?? "Failed to link wallet.")
-      }
-    } catch {
-      setMsg("Something went wrong.")
-    } finally {
-      setSaving(false)
     }
   }
 
@@ -375,46 +348,13 @@ function ProfileDialog({ open, onClose }: { open: boolean; onClose: () => void }
           {/* Wallet */}
           <div className="pt-2 border-t border-white/[0.06] space-y-3">
             <div className="space-y-1.5">
-              <Label className="text-xs text-slate-500 tracking-wider uppercase">Linked Wallet</Label>
+              <Label className="text-xs text-slate-500 tracking-wider uppercase">T3N Wallet</Label>
               <Input
                 value={sessionWallet ?? "No wallet linked"}
                 readOnly
                 className="bg-white/[0.02] border-white/[0.06] font-mono text-xs text-slate-300 cursor-default"
               />
             </div>
-
-
-{(session?.user as any)?.walletType !== "managed" && !isConnected && sessionWallet && (
-              <div className="space-y-1.5">
-                <Label className="text-xs text-slate-500 tracking-wider uppercase">External wallet — reconnect MetaMask for on-chain actions</Label>
-                <div className="flex justify-center pt-1">
-                  <ConnectButton label="Reconnect Wallet" accountStatus="address" showBalance={false} />
-                </div>
-              </div>
-            )}
-
-            {!sessionWallet && (
-              <div className="space-y-1.5">
-                <Label className="text-xs text-slate-500 tracking-wider uppercase">No wallet linked yet</Label>
-                <div className="flex justify-center pt-1">
-                  <ConnectButton label="Connect Wallet" accountStatus="address" showBalance={false} />
-                </div>
-              </div>
-            )}
-
-            {isConnected && address && address.toLowerCase() !== sessionWallet?.toLowerCase() && (session?.user as any)?.walletType !== "managed" && (
-              <div className="space-y-2">
-                <p className="text-xs text-slate-400">
-                  Connected:{" "}
-                  <span className="font-mono text-slate-300">{address.slice(0, 8)}…{address.slice(-6)}</span>
-                </p>
-                <Button size="sm" onClick={linkWallet} disabled={saving}
-                  className="w-full bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg shadow-emerald-900/40">
-                  <Wallet className="h-3.5 w-3.5 mr-1.5" />
-                  {saving ? "Linking…" : "Link this wallet"}
-                </Button>
-              </div>
-            )}
           </div>
 
           {msg && (
@@ -428,7 +368,6 @@ function ProfileDialog({ open, onClose }: { open: boolean; onClose: () => void }
 
 export function DashboardLayout({ children }: DashboardLayoutProps) {
   const { data: session } = useSession()
-  const { isConnected } = useAccount()
   const searchParams = useSearchParams()
   const router = useRouter()
 
@@ -452,13 +391,12 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
     if (
       !onboardingShown &&
       session?.user &&
-      !sessionWalletTop &&
-      !isConnected
+      !sessionWalletTop
     ) {
       setOnboardingShown(true)
       setWalletOnboardingOpen(true)
     }
-  }, [session, sessionWalletTop, isConnected, onboardingShown])
+  }, [session, sessionWalletTop, onboardingShown])
 
   useEffect(() => {
     if (searchParams.get("setup") === "wallet") {
