@@ -66,8 +66,8 @@ export function PaymentFlow({ paymentLink }: PaymentFlowProps) {
 
   if (done) {
     return (
-      <div className="bg-white rounded-2xl border border-emerald-200 shadow-sm p-8 text-center space-y-3">
-        <CheckCircle className="h-12 w-12 text-emerald-500 mx-auto" />
+      <div className="bg-white rounded-2xl border border-sky-200 shadow-sm p-8 text-center space-y-3">
+        <CheckCircle className="h-12 w-12 text-sky-500 mx-auto" />
         <p className="text-lg font-semibold text-slate-900">Payment recorded</p>
         <p className="text-sm text-slate-500">Your payment has been submitted for processing.</p>
       </div>
@@ -78,7 +78,7 @@ export function PaymentFlow({ paymentLink }: PaymentFlowProps) {
     <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 space-y-5">
       <div className="flex items-center justify-between">
         <p className="text-sm font-medium text-slate-700">Pay with T3N Wallet</p>
-        <span className="text-xs bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-full px-2 py-0.5 font-medium flex items-center gap-1">
+        <span className="text-xs bg-sky-50 text-sky-700 border border-sky-200 rounded-full px-2 py-0.5 font-medium flex items-center gap-1">
           <Shield className="h-3 w-3" />
           Secured
         </span>
@@ -106,7 +106,7 @@ export function PaymentFlow({ paymentLink }: PaymentFlowProps) {
       <Button
         onClick={handlePay}
         disabled={sending}
-        className="w-full bg-emerald-600 hover:bg-emerald-700 text-white h-11 font-semibold"
+        className="w-full bg-sky-600 hover:bg-sky-700 text-white h-11 font-semibold"
       >
         {sending ? (
           <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Processing...</>
