@@ -162,18 +162,6 @@ const canPay = canProcessPayment(result, requireKYC, checkSanctions)
 
 **Note:** OFAC check has 5s timeout and fails open (non-blocking on network errors).
 
-### HashKey Settlement Protocol (HSP)
-
-**Location:** `lib/hsp-client.ts`
-
-Optional payment checkout flow (requires HSP merchant credentials):
-
-- **Single-Pay Mandates** — One-time payment links
-- **Multi-Pay Mandates** — Reusable payment links (30-day expiry)
-- **Webhook Verification** — HMAC-SHA256 signature validation
-
-Check `hspClient.isConfigured` before calling HSP methods (returns null if unconfigured).
-
 ### Database Schema Patterns
 
 **Key Models:**
@@ -211,7 +199,6 @@ lib/
   vendor-verify.ts        # Vendor verification + payment via T3N
   agent-wallet.ts         # BIP-32 wallet derivation + T3N payments
   compliance.ts           # OFAC + velocity checks
-  hsp-client.ts           # HashKey Settlement Protocol client
   wallet-crypto.ts        # AES-256-GCM encryption for wallets
   auth-config.ts          # NextAuth configuration
   agent-engine.ts         # Claude-powered AI agents
@@ -246,7 +233,6 @@ prisma/
 - `WALLET_ENCRYPTION_KEY` — 64-char hex string for AES-256-GCM
 
 **Optional:**
-- `HSP_APP_KEY` / `HSP_APP_SECRET` — HashKey Settlement Protocol
 - `MOONSHOT_API_KEY` — Moonshot AI (primary AI provider)
 - `ANTHROPIC_API_KEY` — Claude (fallback AI provider)
 
@@ -348,7 +334,6 @@ if (!session?.user?.id) {
 1. **"WASM component not loaded"** — T3N client not initialized. Always use `getT3nClient()`.
 2. **"Script not found"** — Contract not deployed to T3N. Deploy WASM contracts first.
 3. **Prisma Client errors** — Run `npx prisma generate` after schema changes.
-4. **HSP methods return null** — HSP credentials not configured (optional feature).
 
 ---
 
@@ -423,6 +408,5 @@ The UI uses a **dark-first design** with sky blue as the primary brand color:
 
 - **Terminal 3 Docs:** https://docs.terminal3.io
 - **T3N SDK:** https://www.npmjs.com/package/@terminal3/t3n-sdk
-- **HashKey Settlement Protocol:** https://hsp.hashkey.com
 - **Project README:** See `README.md` for detailed feature overview
 - **Implementation Plan:** See `docs/T3-IMPLEMENTATION-PLAN.md` for T3N integration details
