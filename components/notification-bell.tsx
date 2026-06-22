@@ -114,8 +114,8 @@ export function NotificationBell({ onNavigate }: { onNavigate: (tab: string) => 
                     onClick={() => handleClick(item)}
                     className="w-full flex items-start gap-3 px-4 py-3 hover:bg-white/[0.04] transition-colors text-left border-b border-white/[0.04] last:border-0"
                   >
-                    <div className={`mt-0.5 p-1.5 rounded-lg shrink-0 ${item.read ? 'bg-white/[0.05]' : 'bg-emerald-500/15'}`}>
-                      <Icon className={`h-3.5 w-3.5 ${item.read ? 'text-slate-500' : 'text-emerald-400'}`} />
+                    <div className={`mt-0.5 p-1.5 rounded-lg shrink-0 ${item.read ? 'bg-white/[0.05]' : 'bg-sky-500/15'}`}>
+                      <Icon className={`h-3.5 w-3.5 ${item.read ? 'text-slate-500' : 'text-sky-400'}`} />
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className={`text-xs font-medium truncate ${item.read ? 'text-slate-400' : 'text-white'}`}>{item.title}</p>
@@ -123,7 +123,7 @@ export function NotificationBell({ onNavigate }: { onNavigate: (tab: string) => 
                       <p className="text-[10px] text-slate-700 mt-1">{timeAgo(item.createdAt)}</p>
                     </div>
                     {!item.read && (
-                      <span className="mt-2 w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0" />
+                      <span className="mt-2 w-1.5 h-1.5 rounded-full bg-sky-400 shrink-0" />
                     )}
                   </button>
                 )
