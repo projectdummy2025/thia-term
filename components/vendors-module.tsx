@@ -86,7 +86,7 @@ export function VendorsModule() {
     <div className="p-6 max-w-4xl mx-auto space-y-8">
       <div>
         <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-          <ShieldCheck className="w-6 h-6 text-emerald-400" />
+          <ShieldCheck className="w-6 h-6 text-sky-400" />
           VendorVerify
         </h2>
         <p className="text-slate-400 mt-1">
@@ -105,7 +105,7 @@ export function VendorsModule() {
               value={supplierDid}
               onChange={e => setSupplierDid(e.target.value)}
               placeholder="did:t3n:02153a..."
-              className="w-full px-4 py-2.5 rounded-xl bg-white/[0.04] border border-white/[0.08] text-white text-sm placeholder:text-slate-600 focus:outline-none focus:border-emerald-500/50"
+              className="w-full px-4 py-2.5 rounded-xl bg-white/[0.04] border border-white/[0.08] text-white text-sm placeholder:text-slate-600 focus:outline-none focus:border-sky-500/50"
             />
           </div>
           <div className="space-y-2">
@@ -115,7 +115,7 @@ export function VendorsModule() {
               value={amount}
               onChange={e => setAmount(Number(e.target.value))}
               placeholder="100"
-              className="w-full px-4 py-2.5 rounded-xl bg-white/[0.04] border border-white/[0.08] text-white text-sm placeholder:text-slate-600 focus:outline-none focus:border-emerald-500/50"
+              className="w-full px-4 py-2.5 rounded-xl bg-white/[0.04] border border-white/[0.08] text-white text-sm placeholder:text-slate-600 focus:outline-none focus:border-sky-500/50"
             />
           </div>
           <div className="space-y-2">
@@ -123,7 +123,7 @@ export function VendorsModule() {
             <select
               value={token}
               onChange={e => setToken(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-xl bg-white/[0.04] border border-white/[0.08] text-white text-sm focus:outline-none focus:border-emerald-500/50"
+              className="w-full px-4 py-2.5 rounded-xl bg-white/[0.04] border border-white/[0.08] text-white text-sm focus:outline-none focus:border-sky-500/50"
             >
               <option value="USDC">USDC</option>
               <option value="USDT">USDT</option>
@@ -152,8 +152,8 @@ export function VendorsModule() {
         </button>
 
         {vendor && vendor.status === "verified" && (
-          <div className="rounded-xl bg-emerald-500/[0.08] border border-emerald-500/20 p-4 space-y-3">
-            <div className="flex items-center gap-2 text-emerald-400">
+          <div className="rounded-xl bg-sky-500/[0.08] border border-sky-500/20 p-4 space-y-3">
+            <div className="flex items-center gap-2 text-sky-400">
               <CheckCircle className="w-5 h-5" />
               <span className="font-semibold">Supplier Verified</span>
               {vendor.score && <span className="text-sm ml-auto">Score: {vendor.score}/100</span>}
@@ -167,7 +167,7 @@ export function VendorsModule() {
                 value={toAddress}
                 onChange={e => setToAddress(e.target.value)}
                 placeholder="0x... recipient address"
-                className="w-full px-4 py-2.5 rounded-xl bg-white/[0.04] border border-white/[0.08] text-white text-sm placeholder:text-slate-600 focus:outline-none focus:border-emerald-500/50"
+                className="w-full px-4 py-2.5 rounded-xl bg-white/[0.04] border border-white/[0.08] text-white text-sm placeholder:text-slate-600 focus:outline-none focus:border-sky-500/50"
               />
               <button
                 onClick={handlePay}
@@ -190,7 +190,7 @@ export function VendorsModule() {
 
               {payResult && (
                 <div className="rounded-xl bg-blue-500/[0.08] border border-blue-500/20 p-3">
-                  <p className="text-sm text-emerald-400 font-medium mb-1">✅ Payment Sent</p>
+                  <p className="text-sm text-sky-400 font-medium mb-1">✅ Payment Sent</p>
                   <a
                     href={payResult.txUrl}
                     target="_blank"
@@ -221,7 +221,7 @@ export function VendorsModule() {
             {history.map((v, i) => (
               <div key={i} className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/[0.02] border border-white/[0.04]">
                 {v.status === "verified" ? (
-                  <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <CheckCircle className="w-4 h-4 text-sky-400 shrink-0" />
                 ) : (
                   <XCircle className="w-4 h-4 text-red-400 shrink-0" />
                 )}
