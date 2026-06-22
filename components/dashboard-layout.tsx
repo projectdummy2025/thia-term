@@ -14,12 +14,14 @@ import { NotificationBell } from "@/components/notification-bell"
 import { ProfileDialog } from "@/components/profile-dialog"
 import { WalletSetupModal } from "@/components/wallet-setup-modal"
 import { WalletOnboardingModal } from "@/components/wallet-onboarding-modal"
+import { DemoWalletBanner } from "@/components/demo-wallet-banner"
 import { PaymentLinksModule } from "@/components/payment-links-module"
 import { ComplianceVaultsModule } from "@/components/compliance-vaults-module"
 import { PayrollRailsModule } from "@/components/payroll-rails-module"
 import { AIInvoiceModule } from "@/components/ai-invoice-module"
 import { SettingsModule } from "@/components/settings-module"
 import { VendorsModule } from "@/components/vendors-module"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { signOut } from "next-auth/react"
 
 interface DashboardLayoutProps {
@@ -126,124 +128,129 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
     : "FL"
 
   return (
-    <div className="dark min-h-screen bg-dashboard">
-      {/* ─── Mobile menu overlay ─── */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.15 }}
-            className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm md:hidden"
-            onClick={() => setMobileMenuOpen(false)}
-          />
-        )}
-      </AnimatePresence>
+    <TooltipProvider delayDuration={0}>
+      <div className="dark min-h-screen bg-dashboard">
+        {/* ─── Mobile menu overlay ─── */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.15 }}
+              className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm md:hidden"
+              onClick={() => setMobileMenuOpen(false)}
+            />
+          )}
+        </AnimatePresence>
 
-      {/* ─── Sidebar ─── */}
-      <motion.aside
-        className={cn(
-          "w-64 flex flex-col h-screen fixed left-0 top-0 z-50 border-r border-glass-border bg-sidebar",
-          "md:z-40",
-          "max-md:transition-transform max-md:duration-300",
-          mobileMenuOpen ? "max-md:translate-x-0" : "max-md:-translate-x-full",
-        )}
-        initial={false}
-      >
-        {/* Logo */}
-        <div className="p-5 border-b border-glass-border">
-          <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl overflow-hidden shadow-lg shadow-sky-900/40 ring-1 ring-sky-500/20">
+        {/* ─── Floating Sidebar ─── */}
+        <motion.aside
+          className={cn(
+            "fixed left-4 top-4 bottom-4 z-50 w-20",
+            "flex flex-col gap-4",
+            "max-md:transition-transform max-md:duration-300",
+            mobileMenuOpen ? "max-md:translate-x-0" : "max-md:-translate-x-full max-md:left-0 max-md:top-0 max-md:bottom-0 max-md:w-64 max-md:rounded-none",
+          )}
+          initial={false}
+        >
+          {/* Logo + Primary Action */}
+          <div className="backdrop-blur-xl bg-white/[0.03] border border-white/[0.08] rounded-2xl p-3 flex flex-col items-center gap-3">
+            <button
+              onClick={() => router.replace("/dashboard")}
+              className="w-12 h-12 rounded-xl overflow-hidden shadow-lg shadow-sky-500/20 ring-1 ring-sky-500/20 hover:ring-sky-500/40 transition-all cursor-pointer"
+            >
               <img src="/thia-term-logo.png" alt="Thia-Term" className="w-full h-full object-cover" />
-            </div>
-            <span className="font-bold text-xl tracking-tight">
-              <span className="text-white">Thia</span><span className="text-sky-400">Term</span>
-            </span>
-          </div>
-        </div>
-
-        {/* Primary action */}
-        <div className="p-4">
-          <button
-            onClick={() => navigateTo("payment-links")}
-            className="w-full relative overflow-hidden rounded-xl py-2.5 text-sm font-semibold flex items-center justify-center gap-2 transition-all duration-200 group bg-brand-gradient shadow-brand-glow"
-          >
-            <span className="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-colors rounded-xl" />
-            <Send className="w-4 h-4 text-white relative z-10" />
-            <span className="text-white relative z-10">Send Payment</span>
-          </button>
-        </div>
-
-        {/* Nav items */}
-        <nav className="flex-1 px-3 space-y-0.5 overflow-y-auto py-2">
-          {navigation.map((item) => {
-            const isActive = activeTab === item.id
-            const Icon = item.icon
-            return (
-              <button
-                key={item.id}
-                onClick={() => navigateTo(item.id)}
-                className={cn(
-                  "w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150",
-                  isActive
-                    ? "text-sky-300 bg-sky-500/[0.08]"
-                    : "text-slate-500 hover:text-slate-200 hover:bg-white/[0.03]",
-                )}
-                aria-current={isActive ? "page" : undefined}
-              >
-                <Icon className={cn("w-4 h-4 shrink-0", isActive ? "text-sky-400" : "text-slate-600")} />
-                <span>{item.name}</span>
-                {item.badge && (
-                  <span className={cn(
-                    "ml-auto text-[10px] rounded-md px-1.5 py-0.5 font-semibold",
-                    isActive
-                      ? "bg-sky-500/15 text-sky-400"
-                      : "bg-white/[0.05] text-slate-600",
-                  )}>
-                    {item.badge}
-                  </span>
-                )}
-              </button>
-            )
-          })}
-        </nav>
-
-        {/* User section */}
-        <div className="p-4 border-t border-glass-border">
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => setProfileOpen(true)}
-              className="flex-1 flex items-center gap-3 hover:bg-white/[0.04] rounded-xl p-2 transition-colors text-left cursor-pointer min-w-0 group"
-              title="Edit profile"
-            >
-              <div className="w-9 h-9 rounded-full bg-sky-900/40 flex items-center justify-center text-sky-400 font-semibold text-sm shrink-0 overflow-hidden ring-1 ring-sky-500/20">
-                {session?.user?.image ? (
-                  <img src={session.user.image} alt="Avatar" className="w-full h-full object-cover" />
-                ) : initials}
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-slate-200 truncate leading-tight group-hover:text-white transition-colors">{session?.user?.name ?? "User"}</p>
-                <p className="text-xs text-slate-600 truncate leading-tight mt-0.5">{email}</p>
-              </div>
             </button>
-            <button
-              onClick={handleLogout}
-              className="p-2 rounded-xl text-slate-700 hover:text-slate-300 hover:bg-white/[0.04] transition-colors shrink-0"
-              title="Log out"
-              aria-label="Log out"
-            >
-              <LogOut className="h-4 w-4" />
-            </button>
+
+            <div className="w-full h-px bg-white/[0.08]" />
+
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <button
+                  onClick={() => navigateTo("payment-links")}
+                  className="w-12 h-12 relative overflow-hidden rounded-xl flex items-center justify-center transition-all duration-200 group bg-brand-gradient shadow-brand-glow hover:scale-105"
+                >
+                  <span className="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-colors rounded-xl" />
+                  <Send className="w-5 h-5 text-white relative z-10" />
+                </button>
+              </TooltipTrigger>
+              <TooltipContent side="right">Send Payment</TooltipContent>
+            </Tooltip>
           </div>
-        </div>
-      </motion.aside>
+
+          {/* Nav items */}
+          <nav className="flex-1 backdrop-blur-xl bg-white/[0.03] border border-white/[0.08] rounded-2xl p-3 flex flex-col gap-2 overflow-y-auto">
+            {navigation.map((item) => {
+              const isActive = activeTab === item.id
+              const Icon = item.icon
+              return (
+                <Tooltip key={item.id}>
+                  <TooltipTrigger asChild>
+                    <button
+                      onClick={() => navigateTo(item.id)}
+                      className={cn(
+                        "relative w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-150 group",
+                        isActive
+                          ? "bg-sky-500/[0.15] text-sky-400"
+                          : "text-slate-500 hover:text-sky-400 hover:bg-white/[0.05]",
+                      )}
+                      aria-current={isActive ? "page" : undefined}
+                    >
+                      <Icon className={cn("w-5 h-5 transition-transform group-hover:scale-110", isActive && "scale-110")} />
+                      {item.badge && (
+                        <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-sky-500 text-white text-[10px] font-bold flex items-center justify-center ring-2 ring-[#0a1220]">
+                          {item.badge}
+                        </span>
+                      )}
+                    </button>
+                  </TooltipTrigger>
+                  <TooltipContent side="right">{item.name}</TooltipContent>
+                </Tooltip>
+              )
+            })}
+          </nav>
+
+          {/* User section */}
+          <div className="backdrop-blur-xl bg-white/[0.03] border border-white/[0.08] rounded-2xl p-3 flex flex-col items-center gap-2">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <button
+                  onClick={() => setProfileOpen(true)}
+                  className="w-12 h-12 rounded-full bg-sky-900/40 flex items-center justify-center text-sky-400 font-semibold text-sm overflow-hidden ring-2 ring-sky-500/20 hover:ring-sky-500/40 transition-all cursor-pointer hover:scale-105"
+                >
+                  {session?.user?.image ? (
+                    <img src={session.user.image} alt="Avatar" className="w-full h-full object-cover" />
+                  ) : initials}
+                </button>
+              </TooltipTrigger>
+              <TooltipContent side="right">
+                <div className="text-left">
+                  <p className="font-semibold">{session?.user?.name ?? "User"}</p>
+                  <p className="text-xs text-slate-400">{email}</p>
+                </div>
+              </TooltipContent>
+            </Tooltip>
+
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <button
+                  onClick={handleLogout}
+                  className="w-10 h-10 rounded-xl text-slate-500 hover:text-red-400 hover:bg-red-500/10 transition-all flex items-center justify-center"
+                >
+                  <LogOut className="h-4 w-4" />
+                </button>
+              </TooltipTrigger>
+              <TooltipContent side="right">Logout</TooltipContent>
+            </Tooltip>
+          </div>
+        </motion.aside>
 
       {/* ─── Main content ─── */}
-      <div className="md:ml-64 flex flex-col min-h-screen">
+      <div className="md:ml-28 flex flex-col min-h-screen">
         {/* Topbar */}
-        <header className="h-14 flex items-center justify-between px-4 md:px-6 sticky top-0 z-30 border-b border-glass-border bg-topbar">
-          <div className="flex items-center gap-3">
+        <header className="h-16 flex items-center justify-between px-6 md:px-8 sticky top-0 z-30 backdrop-blur-xl bg-white/[0.02] border-b border-white/[0.08]">
+          <div className="flex items-center gap-4">
             {/* Mobile menu toggle */}
             <button
               onClick={() => setMobileMenuOpen(true)}
@@ -254,23 +261,28 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
             </button>
 
             {/* Active page label */}
-            <span className="text-xs text-slate-600 font-mono tracking-widest uppercase">
-              {navigation.find(n => n.id === activeTab)?.name ?? "Dashboard"}
-            </span>
+            <div>
+              <h1 className="text-lg font-bold text-white">
+                {navigation.find(n => n.id === activeTab)?.name ?? "Dashboard"}
+              </h1>
+              <p className="text-xs text-slate-500">
+                Welcome back, {session?.user?.name?.split(' ')[0] ?? 'User'}
+              </p>
+            </div>
           </div>
 
           <div className="flex items-center gap-3">
             <NotificationBell onNavigate={navigateTo} />
             <button
               onClick={() => setProfileOpen(true)}
-              className="flex items-center gap-2 hover:bg-white/[0.04] rounded-xl px-2 py-1.5 transition-colors"
+              className="flex items-center gap-2 hover:bg-white/[0.04] rounded-xl px-3 py-2 transition-colors group"
             >
-              <div className="w-7 h-7 rounded-full bg-sky-900/40 flex items-center justify-center text-sky-400 font-semibold text-xs ring-1 ring-sky-500/20 overflow-hidden">
+              <div className="w-8 h-8 rounded-full bg-sky-900/40 flex items-center justify-center text-sky-400 font-semibold text-xs ring-2 ring-sky-500/20 group-hover:ring-sky-500/40 overflow-hidden transition-all">
                 {session?.user?.image ? (
                   <img src={session.user.image} alt="Avatar" className="w-full h-full object-cover" />
                 ) : initials}
               </div>
-              <span className="text-sm font-medium text-slate-400 hidden md:block">{session?.user?.name}</span>
+              <span className="text-sm font-medium text-slate-300 hidden md:block group-hover:text-white transition-colors">{session?.user?.name}</span>
             </button>
           </div>
         </header>
@@ -278,8 +290,11 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
         {/* Wallet setup banner */}
         <WalletBanner onSetup={() => setWalletSetupOpen(true)} />
 
+        {/* Demo wallet banner */}
+        <DemoWalletBanner />
+
         {/* Page content with tab transitions */}
-        <main className="flex-1 p-4 md:p-6">
+        <main className="flex-1 p-6 md:p-8">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTab}
@@ -297,6 +312,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
       <ProfileDialog open={profileOpen} onClose={() => setProfileOpen(false)} />
       <WalletSetupModal open={walletSetupOpen} onClose={() => setWalletSetupOpen(false)} />
       <WalletOnboardingModal open={walletOnboardingOpen} onClose={() => setWalletOnboardingOpen(false)} />
-    </div>
+      </div>
+    </TooltipProvider>
   )
 }
