@@ -11,7 +11,7 @@ export function Footer() {
           <img src="/thia-term-logo.png" alt="Thia-Term" className="w-8 h-8 rounded-lg object-cover opacity-90 group-hover:opacity-100 transition-opacity" />
           <span className="font-bold text-sm tracking-tight">
             <span className="text-white">Thia</span>
-            <span className="text-emerald-400">Term</span>
+            <span className="text-sky-400">Term</span>
           </span>
         </Link>
 
