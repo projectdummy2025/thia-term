@@ -68,7 +68,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="relative min-h-screen overflow-hidden flex flex-col">
+    <div className="relative min-h-screen overflow-hidden flex">
       {/* Animated Background */}
       <div className="fixed inset-0 -z-10 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
         {/* Animated mesh gradients */}
@@ -96,86 +96,124 @@ export default function LoginPage() {
         <div className="absolute inset-0 bg-[linear-gradient(rgba(14,165,233,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(14,165,233,0.03)_1px,transparent_1px)] bg-[size:72px_72px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,black,transparent)]" />
       </div>
 
-      {/* Top nav — glassmorphism */}
-      <motion.header
-        initial={{ y: -20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6 }}
-        className="relative backdrop-blur-xl bg-white/5 border-b border-white/10 px-6 h-16 flex items-center justify-between z-10"
-      >
-        <Link href="/" className="flex items-center gap-2 group">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-sky-500 to-sky-600 p-[1px] shadow-lg shadow-sky-500/20 group-hover:shadow-sky-500/40 transition-all">
-            <img src="/thia-term-logo.png" alt="Thia-Term" className="w-full h-full rounded-xl object-cover" />
-          </div>
-          <span className="font-bold text-xl tracking-tight">
-            <span className="text-white">Thia</span><span className="text-sky-400">-Term</span>
-          </span>
-        </Link>
-        <Link href="/" className="text-sm text-slate-400 hover:text-white transition-colors flex items-center gap-1 group">
-          <span>Back to home</span>
-          <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-        </Link>
-      </motion.header>
-
-      {/* Main content */}
-      <div className="flex-1 flex items-center justify-center px-4 py-8 relative">
-
-        {/* Floating features — desktop only */}
-        <div className="hidden xl:block absolute left-[10%] top-1/2 -translate-y-1/2 space-y-6 max-w-sm">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
-          >
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-sm font-medium mb-6 backdrop-blur-xl">
-              <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />
-              Powered by T3N
+      {/* ─── LEFT PANEL: Features ─── */}
+      <div className="hidden lg:flex lg:w-1/2 xl:w-[45%] flex-col justify-between p-12 relative">
+        {/* Logo */}
+        <motion.div
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.6 }}
+        >
+          <Link href="/" className="flex items-center gap-2 group w-fit">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-sky-500 to-sky-600 p-[1px] shadow-lg shadow-sky-500/20 group-hover:shadow-sky-500/40 transition-all">
+              <img src="/thia-term-logo.png" alt="Thia-Term" className="w-full h-full rounded-xl object-cover" />
             </div>
-            <h2 className="text-4xl font-black text-white leading-tight tracking-tight mb-3">
-              Crypto Payments with{" "}
-              <span className="bg-gradient-to-r from-sky-400 to-cyan-400 bg-clip-text text-transparent">
-                Built-in Compliance
-              </span>
-            </h2>
-            <p className="text-slate-400 text-base leading-relaxed">
-              KYC checks, sanctions screening, and on-chain settlement — handle crypto payments responsibly.
-            </p>
-          </motion.div>
+            <span className="font-bold text-2xl tracking-tight">
+              <span className="text-white">Thia</span><span className="text-sky-400">-Term</span>
+            </span>
+          </Link>
+        </motion.div>
 
-          {/* Animated feature cards */}
+        {/* Main content */}
+        <div className="space-y-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.6 }}
-            className="space-y-3"
+            transition={{ delay: 0.2, duration: 0.6 }}
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-400 text-sm font-medium mb-8 backdrop-blur-xl">
+              <span className="w-2 h-2 rounded-full bg-sky-400 animate-pulse" />
+              Powered by T3N
+            </div>
+            <h1 className="text-5xl xl:text-6xl font-black text-white leading-[1.1] tracking-tight mb-6">
+              Crypto Payments{" "}
+              <span className="bg-gradient-to-r from-sky-400 to-cyan-400 bg-clip-text text-transparent">
+                with Compliance
+              </span>
+            </h1>
+            <p className="text-xl text-slate-400 leading-relaxed max-w-lg">
+              Handle crypto payments responsibly with built-in KYC checks, sanctions screening, and on-chain settlement.
+            </p>
+          </motion.div>
+
+          {/* Feature cards */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.6 }}
+            className="grid gap-4 max-w-lg"
           >
             {[
-              { icon: Zap, label: "Instant Settlement", desc: "Real-time on-chain" },
-              { icon: Shield, label: "Auto Compliance", desc: "KYC + AML checks" },
-              { icon: TrendingUp, label: "Smart Analytics", desc: "Track all payments" },
+              { icon: Zap, label: "Instant Settlement", desc: "Real-time on-chain payments" },
+              { icon: Shield, label: "Auto Compliance", desc: "KYC + AML checks built-in" },
+              { icon: TrendingUp, label: "Smart Analytics", desc: "Track all your payments" },
             ].map((item, i) => (
               <motion.div
                 key={item.label}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.6 + i * 0.1 }}
-                whileHover={{ x: 4, transition: { duration: 0.2 } }}
-                className="flex items-center gap-3 px-4 py-3 bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl hover:bg-white/10 transition-colors cursor-default"
+                transition={{ delay: 0.5 + i * 0.1 }}
+                className="flex items-center gap-4 px-5 py-4 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl hover:bg-white/10 transition-all group"
               >
-                <div className="w-9 h-9 rounded-lg bg-sky-500/10 flex items-center justify-center shrink-0">
-                  <item.icon className="h-4 w-4 text-sky-400" />
+                <div className="w-12 h-12 rounded-xl bg-sky-500/10 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                  <item.icon className="h-6 w-6 text-sky-400" />
                 </div>
                 <div className="flex-1">
-                  <p className="text-sm font-semibold text-white">{item.label}</p>
-                  <p className="text-xs text-slate-400">{item.desc}</p>
+                  <p className="text-base font-semibold text-white">{item.label}</p>
+                  <p className="text-sm text-slate-400 mt-0.5">{item.desc}</p>
                 </div>
-                <CheckCircle className="h-4 w-4 text-sky-400/60" />
+                <CheckCircle className="h-5 w-5 text-sky-400/60" />
               </motion.div>
             ))}
           </motion.div>
         </div>
 
-        {/* Auth card — glassmorphism */}
+        {/* Footer */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.8 }}
+          className="flex items-center gap-8"
+        >
+          {[
+            { icon: Shield, label: "KYC/AML" },
+            { icon: Lock, label: "Encrypted" },
+            { icon: CheckCircle, label: "Compliant" },
+          ].map((item) => (
+            <div key={item.label} className="flex items-center gap-2 text-sm text-slate-400">
+              <item.icon className="h-4 w-4 text-sky-400" />
+              <span className="font-medium">{item.label}</span>
+            </div>
+          ))}
+        </motion.div>
+      </div>
+
+      {/* ─── RIGHT PANEL: Auth Form ─── */}
+      <div className="flex-1 flex flex-col lg:w-1/2 xl:w-[55%]">
+        {/* Mobile header */}
+        <motion.header
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.6 }}
+          className="lg:hidden backdrop-blur-xl bg-white/5 border-b border-white/10 px-6 h-16 flex items-center justify-between"
+        >
+          <Link href="/" className="flex items-center gap-2">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-sky-500 to-sky-600 p-[1px]">
+              <img src="/thia-term-logo.png" alt="Thia-Term" className="w-full h-full rounded-xl object-cover" />
+            </div>
+            <span className="font-bold text-xl tracking-tight">
+              <span className="text-white">Thia</span><span className="text-sky-400">-Term</span>
+            </span>
+          </Link>
+          <Link href="/" className="text-sm text-slate-400 hover:text-white">
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </motion.header>
+
+        {/* Form container */}
+        <div className="flex-1 flex items-center justify-center px-6 py-8 lg:py-12">
+
+        {/* Auth card */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -412,7 +450,7 @@ export default function LoginPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
-          className="xl:hidden absolute bottom-8 left-0 right-0 px-4"
+          className="lg:hidden mt-8"
         >
           <div className="max-w-md mx-auto grid grid-cols-3 gap-3">
             {[
@@ -432,6 +470,7 @@ export default function LoginPage() {
             ))}
           </div>
         </motion.div>
+        </div>
       </div>
     </div>
   )
