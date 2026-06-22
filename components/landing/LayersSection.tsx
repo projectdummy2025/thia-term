@@ -8,7 +8,7 @@ const layers = [
     title: "Human-to-Human",
     subtitle: "Business Stablecoin Payments",
     tag: "Live",
-    tagStyle: "bg-emerald-500/20 text-emerald-400 border-emerald-500/30",
+    tagStyle: "bg-sky-500/20 text-sky-400 border-sky-500/30",
     live: true,
     dim: false,
     desc: "Create invoices, generate payment links, and receive stablecoin payments via T3N. Every settled payment is recorded on-chain and contributes to your verifiable payment reputation.",
@@ -76,7 +76,7 @@ export function LayersSection() {
       <div ref={sectionRef} className="container mx-auto px-8 max-w-5xl">
         {/* Header */}
         <div className="reveal-item mb-16">
-          <p className="text-xs font-mono text-emerald-400/70 tracking-[0.2em] uppercase mb-5">
+          <p className="text-xs font-mono text-sky-400/70 tracking-[0.2em] uppercase mb-5">
             / How Thia-Term Scales Compliance
           </p>
           <h2 className="text-5xl md:text-6xl font-light text-white tracking-tight">
@@ -94,7 +94,7 @@ export function LayersSection() {
               }`}
             >
               {/* Number */}
-              <span className="text-xs font-mono text-emerald-400 mt-1.5 w-8 shrink-0">
+              <span className="text-xs font-mono text-sky-400 mt-1.5 w-8 shrink-0">
                 {layer.num}
               </span>
 
@@ -108,7 +108,7 @@ export function LayersSection() {
                     className={`inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1 rounded-full border ${layer.tagStyle}`}
                   >
                     {layer.live && (
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />
                     )}
                     {layer.tag}
                   </span>
