@@ -39,7 +39,7 @@ interface Agent {
 const statusConfig = {
   draft:     { label: "Draft",     color: "bg-white/[0.06] text-slate-400 border-white/[0.08]",       icon: FileText },
   pending:   { label: "Pending",   color: "bg-amber-500/10 text-amber-400 border-amber-500/20",        icon: Clock },
-  paid:      { label: "Paid",      color: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",  icon: CheckCircle },
+  paid:      { label: "Paid",      color: "bg-sky-500/10 text-sky-400 border-sky-500/20",  icon: CheckCircle },
   overdue:   { label: "Overdue",   color: "bg-red-500/10 text-red-400 border-red-500/20",              icon: AlertTriangle },
   cancelled: { label: "Cancelled", color: "bg-white/[0.06] text-slate-500 border-white/[0.08]",        icon: X },
 }
@@ -150,7 +150,7 @@ function CreateInvoiceDialog({
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-[#0f172a] border border-white/10">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2 text-white">
-            <FileText className="h-5 w-5 text-emerald-400" />
+            <FileText className="h-5 w-5 text-sky-400" />
             New Invoice
           </DialogTitle>
           <DialogDescription className="text-slate-500">Create an invoice and share the payment link with your client.</DialogDescription>
@@ -162,19 +162,19 @@ function CreateInvoiceDialog({
             <div>
               <Label className="text-xs text-slate-400">Invoice To (Name) *</Label>
               <Input value={form.issuedTo} onChange={e => setForm(f => ({ ...f, issuedTo: e.target.value }))} placeholder="Client name or company"
-                className="mt-1 bg-white/[0.04] border-white/10 text-white placeholder:text-slate-600 focus:border-emerald-500/50 rounded-xl" />
+                className="mt-1 bg-white/[0.04] border-white/10 text-white placeholder:text-slate-600 focus:border-sky-500/50 rounded-xl" />
             </div>
             <div>
               <Label className="text-xs text-slate-400">Client Wallet Address</Label>
               <Input value={form.issuedToAddress} onChange={e => setForm(f => ({ ...f, issuedToAddress: e.target.value }))} placeholder="0x… (optional)"
-                className="mt-1 bg-white/[0.04] border-white/10 text-white placeholder:text-slate-600 focus:border-emerald-500/50 rounded-xl" />
+                className="mt-1 bg-white/[0.04] border-white/10 text-white placeholder:text-slate-600 focus:border-sky-500/50 rounded-xl" />
             </div>
           </div>
 
           <div>
             <Label className="text-xs text-slate-400">Description</Label>
             <Textarea value={form.description} onChange={e => setForm(f => ({ ...f, description: e.target.value }))} placeholder="Services rendered, project details…"
-              className="mt-1 bg-white/[0.04] border-white/10 text-white placeholder:text-slate-600 focus:border-emerald-500/50 rounded-xl resize-none" rows={2} />
+              className="mt-1 bg-white/[0.04] border-white/10 text-white placeholder:text-slate-600 focus:border-sky-500/50 rounded-xl resize-none" rows={2} />
           </div>
 
           {/* Payment settings */}
@@ -203,13 +203,13 @@ function CreateInvoiceDialog({
             <div>
               <Label className="text-xs text-slate-400">Due Date</Label>
               <Input type="date" value={form.dueAt} onChange={e => setForm(f => ({ ...f, dueAt: e.target.value }))}
-                className="mt-1 bg-white/[0.04] border-white/10 text-white focus:border-emerald-500/50 rounded-xl" />
+                className="mt-1 bg-white/[0.04] border-white/10 text-white focus:border-sky-500/50 rounded-xl" />
             </div>
           </div>
 
           {/* KYC */}
           <div className="flex items-center gap-3 p-3 bg-white/[0.04] border border-white/[0.06] rounded-xl">
-            <Shield className="h-4 w-4 text-emerald-400 shrink-0" />
+            <Shield className="h-4 w-4 text-sky-400 shrink-0" />
             <div className="flex-1">
               <p className="text-white text-sm font-medium">Require KYC</p>
               <p className="text-slate-500 text-xs">Payer must complete KYC before payment</p>
@@ -243,7 +243,7 @@ function CreateInvoiceDialog({
           <div>
             <div className="flex items-center justify-between mb-2">
               <Label className="text-xs text-slate-400">Line Items</Label>
-              <Button variant="ghost" size="sm" className="text-emerald-400 hover:text-emerald-300 h-6 text-xs"
+              <Button variant="ghost" size="sm" className="text-sky-400 hover:text-sky-300 h-6 text-xs"
                 onClick={() => setLineItems([...lineItems, emptyLineItem()])}>
                 <Plus className="h-3 w-3 mr-1" /> Add Item
               </Button>
@@ -258,7 +258,7 @@ function CreateInvoiceDialog({
                   <Input className="col-span-2 text-xs h-8 bg-white/[0.04] border-white/10 text-white placeholder:text-slate-600" placeholder="Price" value={item.unitPrice}
                     onChange={e => updateLineItem(idx, "unitPrice", e.target.value)} />
                   <div className="col-span-2 text-right">
-                    <span className="text-emerald-400 text-xs font-mono">${item.total}</span>
+                    <span className="text-sky-400 text-xs font-mono">${item.total}</span>
                   </div>
                   <Button variant="ghost" size="sm" className="col-span-1 h-8 w-8 p-0 text-red-400 hover:text-red-300 hover:bg-red-500/10"
                     onClick={() => setLineItems(lineItems.filter((_, i) => i !== idx))} disabled={lineItems.length === 1}>
@@ -270,12 +270,12 @@ function CreateInvoiceDialog({
             <div className="flex justify-end mt-3 pt-3 border-t border-white/[0.06]">
               <div className="text-right">
                 <p className="text-slate-500 text-xs">Total</p>
-                <p className="text-emerald-400 font-bold text-xl font-mono">${totalAmount} <span className="text-sm font-normal">{form.currency}</span></p>
+                <p className="text-sky-400 font-bold text-xl font-mono">${totalAmount} <span className="text-sm font-normal">{form.currency}</span></p>
               </div>
             </div>
           </div>
 
-          <Button className="w-full bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white rounded-xl shadow-lg shadow-emerald-900/30" onClick={create}
+          <Button className="w-full bg-gradient-to-r from-sky-600 to-sky-500 hover:from-sky-500 hover:to-sky-400 text-white rounded-xl shadow-lg shadow-sky-900/30" onClick={create}
             disabled={loading || !form.issuedTo || !lineItems[0].description || parseFloat(totalAmount) <= 0}>
             {loading ? "Creating…" : "Create Invoice & Get Payment Link"}
             <Zap className="ml-2 h-4 w-4" />
@@ -325,11 +325,11 @@ function AIAssistantPanel({ onCreateFromAI }: { onCreateFromAI?: (draft: Partial
       <div className="flex-1 overflow-y-auto space-y-4 pr-1 pb-2">
         {messages.map((m, i) => (
           <div key={i} className={`flex gap-3 ${m.role === "user" ? "flex-row-reverse" : ""}`}>
-            <div className={`w-7 h-7 rounded-full shrink-0 flex items-center justify-center text-white text-xs font-bold ${m.role === "assistant" ? "bg-indigo-500" : "bg-emerald-500"}`}>
+            <div className={`w-7 h-7 rounded-full shrink-0 flex items-center justify-center text-white text-xs font-bold ${m.role === "assistant" ? "bg-indigo-500" : "bg-sky-500"}`}>
               {m.role === "assistant" ? <Sparkles className="h-3.5 w-3.5" /> : <User className="h-3.5 w-3.5" />}
             </div>
             <div className={`max-w-[80%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${
-              m.role === "assistant" ? "bg-white/[0.06] text-slate-200" : "bg-emerald-600 text-white"
+              m.role === "assistant" ? "bg-white/[0.06] text-slate-200" : "bg-sky-600 text-white"
             }`}>
               {m.content}
             </div>
@@ -357,11 +357,11 @@ function AIAssistantPanel({ onCreateFromAI }: { onCreateFromAI?: (draft: Partial
           onChange={e => setInput(e.target.value)}
           onKeyDown={e => e.key === "Enter" && !e.shiftKey && send()}
           placeholder="Ask me to draft an invoice…"
-          className="flex-1 bg-white/[0.04] border-white/10 text-white placeholder:text-slate-600 focus:border-emerald-500/50 rounded-xl"
+          className="flex-1 bg-white/[0.04] border-white/10 text-white placeholder:text-slate-600 focus:border-sky-500/50 rounded-xl"
           disabled={loading}
         />
         <Button onClick={send} disabled={!input.trim() || loading}
-          className="bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white rounded-xl shrink-0">
+          className="bg-gradient-to-r from-sky-600 to-sky-500 hover:from-sky-500 hover:to-sky-400 text-white rounded-xl shrink-0">
           <Send className="h-4 w-4" />
         </Button>
       </div>
@@ -383,8 +383,8 @@ function InvoiceRow({ invoice, onClick }: { invoice: Invoice; onClick: () => voi
     >
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-3 min-w-0">
-          <div className="p-2 bg-emerald-500/10 rounded-lg shrink-0">
-            <FileText className="h-4 w-4 text-emerald-400" />
+          <div className="p-2 bg-sky-500/10 rounded-lg shrink-0">
+            <FileText className="h-4 w-4 text-sky-400" />
           </div>
           <div className="min-w-0">
             <div className="flex items-center gap-2 flex-wrap">
@@ -403,7 +403,7 @@ function InvoiceRow({ invoice, onClick }: { invoice: Invoice; onClick: () => voi
           <Badge className={`text-xs border ${status.color} flex items-center gap-1`}>
             <StatusIcon className="h-3 w-3" />{status.label}
           </Badge>
-          <p className="text-emerald-400 font-bold font-mono text-sm">${parseFloat(String(invoice.amount)).toLocaleString()} {invoice.currency}</p>
+          <p className="text-sky-400 font-bold font-mono text-sm">${parseFloat(String(invoice.amount)).toLocaleString()} {invoice.currency}</p>
           {invoice.dueAt ? <p className="text-slate-500 text-xs">Due {new Date(invoice.dueAt).toLocaleDateString()}</p> : null}
         </div>
       </div>
@@ -472,16 +472,16 @@ export function AIInvoiceModule() {
     <div className="space-y-5">
       {/* Payment link created banner */}
       {createdPaymentLink && (
-        <div className="flex items-center justify-between gap-4 p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl">
+        <div className="flex items-center justify-between gap-4 p-4 bg-sky-500/10 border border-sky-500/20 rounded-2xl">
           <div className="flex items-center gap-3 min-w-0">
-            <CheckCircle className="h-5 w-5 text-emerald-400 shrink-0" />
+            <CheckCircle className="h-5 w-5 text-sky-400 shrink-0" />
             <div className="min-w-0">
-              <p className="text-emerald-400 font-semibold text-sm">Invoice created — share with your client</p>
-              <p className="font-mono text-xs text-emerald-400/60 truncate">{createdPaymentLink}</p>
+              <p className="text-sky-400 font-semibold text-sm">Invoice created — share with your client</p>
+              <p className="font-mono text-xs text-sky-400/60 truncate">{createdPaymentLink}</p>
             </div>
           </div>
           <div className="flex gap-2 shrink-0">
-            <Button size="sm" className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 hover:bg-emerald-500/20 rounded-xl"
+            <Button size="sm" className="bg-sky-500/10 border border-sky-500/20 text-sky-400 hover:bg-sky-500/20 rounded-xl"
               onClick={() => copyToClipboard(createdPaymentLink)}>
               <Copy className="h-3 w-3 mr-1" /> Copy
             </Button>
@@ -556,7 +556,7 @@ export function AIInvoiceModule() {
                   </button>
                 ))}
               </div>
-              <Button className="bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white rounded-xl shadow-lg shadow-emerald-900/30 gap-2"
+              <Button className="bg-gradient-to-r from-sky-600 to-sky-500 hover:from-sky-500 hover:to-sky-400 text-white rounded-xl shadow-lg shadow-sky-900/30 gap-2"
                 onClick={() => setShowCreate(true)}>
                 <Plus className="h-4 w-4" /> New Invoice
               </Button>
@@ -565,11 +565,11 @@ export function AIInvoiceModule() {
             {invoices.length === 0 ? (
               <div className="text-center py-16">
                 <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-4 mx-auto" style={{ background: "linear-gradient(135deg, #0a2e2e, #0f3d3d)" }}>
-                  <FileText className="h-7 w-7 text-emerald-400" />
+                  <FileText className="h-7 w-7 text-sky-400" />
                 </div>
                 <p className="font-semibold text-white text-base">No invoices yet</p>
                 <p className="text-slate-500 text-sm mt-1">Create your first invoice to get a shareable payment link</p>
-                <Button className="mt-5 bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white rounded-xl shadow-lg shadow-emerald-900/30 gap-2"
+                <Button className="mt-5 bg-gradient-to-r from-sky-600 to-sky-500 hover:from-sky-500 hover:to-sky-400 text-white rounded-xl shadow-lg shadow-sky-900/30 gap-2"
                   onClick={() => setShowCreate(true)}>
                   <Plus className="h-4 w-4" /> New Invoice
                 </Button>
@@ -587,7 +587,7 @@ export function AIInvoiceModule() {
           <TabsContent value="ai" className="mt-0">
             <div className="mb-4 flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ background: "linear-gradient(135deg, #0a2e2e, #0f3d3d)" }}>
-                <Sparkles className="h-5 w-5 text-emerald-400" />
+                <Sparkles className="h-5 w-5 text-sky-400" />
               </div>
               <div>
                 <span className="font-semibold text-white text-sm">AI Invoice Assistant</span>
@@ -609,31 +609,31 @@ export function AIInvoiceModule() {
                 </DialogTrigger>
                 <DialogContent className="max-w-lg bg-[#0f172a] border border-white/10">
                   <DialogHeader>
-                    <DialogTitle className="flex items-center gap-2 text-white"><Bot className="h-5 w-5 text-emerald-400" />Register Agent</DialogTitle>
+                    <DialogTitle className="flex items-center gap-2 text-white"><Bot className="h-5 w-5 text-sky-400" />Register Agent</DialogTitle>
                     <DialogDescription className="text-slate-500">Register an AI agent with a wallet to issue invoices on-chain autonomously.</DialogDescription>
                   </DialogHeader>
                   <div className="space-y-4 mt-2">
                     <div>
                       <Label className="text-xs text-slate-400">Agent Name *</Label>
                       <Input value={agentForm.name} onChange={e => setAgentForm(f => ({ ...f, name: e.target.value }))} placeholder="e.g. Analytics Agent"
-                        className="mt-1 bg-white/[0.04] border-white/10 text-white placeholder:text-slate-600 focus:border-emerald-500/50 rounded-xl" />
+                        className="mt-1 bg-white/[0.04] border-white/10 text-white placeholder:text-slate-600 focus:border-sky-500/50 rounded-xl" />
                     </div>
                     <div>
                       <Label className="text-xs text-slate-400">Description</Label>
                       <Textarea value={agentForm.description} onChange={e => setAgentForm(f => ({ ...f, description: e.target.value }))} placeholder="What does this agent do?"
-                        className="mt-1 bg-white/[0.04] border-white/10 text-white placeholder:text-slate-600 focus:border-emerald-500/50 rounded-xl resize-none" rows={2} />
+                        className="mt-1 bg-white/[0.04] border-white/10 text-white placeholder:text-slate-600 focus:border-sky-500/50 rounded-xl resize-none" rows={2} />
                     </div>
                     <div>
                       <Label className="text-xs text-slate-400">Wallet Address</Label>
                       <Input value={agentForm.walletAddress} onChange={e => setAgentForm(f => ({ ...f, walletAddress: e.target.value }))} placeholder="0x…"
-                        className="mt-1 bg-white/[0.04] border-white/10 text-white placeholder:text-slate-600 focus:border-emerald-500/50 rounded-xl font-mono text-sm" />
+                        className="mt-1 bg-white/[0.04] border-white/10 text-white placeholder:text-slate-600 focus:border-sky-500/50 rounded-xl font-mono text-sm" />
                     </div>
                     <div>
                       <Label className="text-xs text-slate-400">Capabilities (comma-separated)</Label>
                       <Input value={agentForm.capabilitiesText} onChange={e => setAgentForm(f => ({ ...f, capabilitiesText: e.target.value }))} placeholder="data-analysis, reporting"
-                        className="mt-1 bg-white/[0.04] border-white/10 text-white placeholder:text-slate-600 focus:border-emerald-500/50 rounded-xl" />
+                        className="mt-1 bg-white/[0.04] border-white/10 text-white placeholder:text-slate-600 focus:border-sky-500/50 rounded-xl" />
                     </div>
-                    <Button className="w-full bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white rounded-xl shadow-lg shadow-emerald-900/30"
+                    <Button className="w-full bg-gradient-to-r from-sky-600 to-sky-500 hover:from-sky-500 hover:to-sky-400 text-white rounded-xl shadow-lg shadow-sky-900/30"
                       onClick={registerAgent} disabled={agentLoading || !agentForm.name}>
                       {agentLoading ? "Registering…" : "Register Agent"}<Bot className="ml-2 h-4 w-4" />
                     </Button>
@@ -645,7 +645,7 @@ export function AIInvoiceModule() {
             {agents.length === 0 ? (
               <div className="text-center py-12">
                 <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-4 mx-auto" style={{ background: "linear-gradient(135deg, #0a2e2e, #0f3d3d)" }}>
-                  <Bot className="h-7 w-7 text-emerald-400" />
+                  <Bot className="h-7 w-7 text-sky-400" />
                 </div>
                 <p className="font-semibold text-white">No agents registered</p>
                 <p className="text-slate-500 text-xs mt-1">Agents can autonomously issue invoices and receive payments to their own wallet</p>
@@ -660,7 +660,7 @@ export function AIInvoiceModule() {
                         <div>
                           <div className="flex items-center gap-2">
                             <p className="text-white font-medium text-sm">{agent.name}</p>
-                            <Badge className={`text-xs border ${agent.status === "active" ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20" : "bg-white/[0.06] text-slate-400 border-white/[0.08]"}`}>{agent.status}</Badge>
+                            <Badge className={`text-xs border ${agent.status === "active" ? "bg-sky-500/10 text-sky-400 border-sky-500/20" : "bg-white/[0.06] text-slate-400 border-white/[0.08]"}`}>{agent.status}</Badge>
                           </div>
                           {agent.description && <p className="text-slate-500 text-xs mt-0.5">{agent.description}</p>}
                           {agent.walletAddress && (
@@ -674,7 +674,7 @@ export function AIInvoiceModule() {
                       </div>
                       <div className="text-right space-y-1">
                         <p className="text-slate-500 text-xs">{agent.invoiceCount} invoice{agent.invoiceCount !== 1 ? "s" : ""}</p>
-                        <p className="text-emerald-400 text-xs font-mono">${agent.totalEarned.toLocaleString()} earned</p>
+                        <p className="text-sky-400 text-xs font-mono">${agent.totalEarned.toLocaleString()} earned</p>
                       </div>
                     </div>
                   </div>
@@ -701,7 +701,7 @@ export function AIInvoiceModule() {
               <DialogHeader>
                 <div className="flex items-center justify-between pr-6">
                   <DialogTitle className="flex items-center gap-2 text-white">
-                    <FileText className="h-5 w-5 text-emerald-400" />
+                    <FileText className="h-5 w-5 text-sky-400" />
                     {selectedInvoice.invoiceNumber}
                   </DialogTitle>
                   <Badge className={`border ${statusConfig[selectedInvoice.status].color}`}>
@@ -754,7 +754,7 @@ export function AIInvoiceModule() {
                             <TableCell className="text-slate-300 text-sm">{item.description}</TableCell>
                             <TableCell className="text-slate-400 text-sm text-center">{item.quantity}</TableCell>
                             <TableCell className="text-slate-400 text-sm text-right font-mono">${item.unitPrice}</TableCell>
-                            <TableCell className="text-emerald-400 text-sm text-right font-mono font-bold">${item.total}</TableCell>
+                            <TableCell className="text-sky-400 text-sm text-right font-mono font-bold">${item.total}</TableCell>
                           </TableRow>
                         ))}
                       </TableBody>
@@ -763,7 +763,7 @@ export function AIInvoiceModule() {
                   <div className="flex justify-end mt-2 pt-2 border-t border-white/[0.06]">
                     <div className="text-right">
                       <p className="text-slate-500 text-xs">Total Due</p>
-                      <p className="text-emerald-400 font-bold text-2xl font-mono">${parseFloat(String(selectedInvoice.amount)).toLocaleString()} {selectedInvoice.currency}</p>
+                      <p className="text-sky-400 font-bold text-2xl font-mono">${parseFloat(String(selectedInvoice.amount)).toLocaleString()} {selectedInvoice.currency}</p>
                     </div>
                   </div>
                 </div>
@@ -780,9 +780,9 @@ export function AIInvoiceModule() {
                     </p>
                   </div>
                   {selectedInvoice.paidAt && (
-                    <div className="p-2 bg-emerald-500/10 border border-emerald-500/20 rounded-lg">
+                    <div className="p-2 bg-sky-500/10 border border-sky-500/20 rounded-lg">
                       <p className="text-slate-500">Paid</p>
-                      <p className="text-emerald-400">{new Date(selectedInvoice.paidAt).toLocaleDateString()}</p>
+                      <p className="text-sky-400">{new Date(selectedInvoice.paidAt).toLocaleDateString()}</p>
                     </div>
                   )}
                 </div>
@@ -790,7 +790,7 @@ export function AIInvoiceModule() {
                 {selectedInvoice.paymentLinkCode && selectedInvoice.status !== "paid" && (
                   <div className="space-y-2">
                     <a href={`/l/${selectedInvoice.paymentLinkCode}`} target="_blank" rel="noopener noreferrer">
-                      <Button className="w-full bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white rounded-xl shadow-lg shadow-emerald-900/30 gap-2">
+                      <Button className="w-full bg-gradient-to-r from-sky-600 to-sky-500 hover:from-sky-500 hover:to-sky-400 text-white rounded-xl shadow-lg shadow-sky-900/30 gap-2">
                         <ExternalLink className="h-4 w-4" /> Pay Now
                       </Button>
                     </a>
