@@ -78,8 +78,8 @@ export function AgentPaymentWidget({ agents }: AgentPaymentWidgetProps) {
             onClick={() => setToType('human')}
             className={`flex-1 py-2.5 text-sm rounded-xl border font-medium transition-colors ${
               toType === 'human'
-                ? 'bg-emerald-600 text-white border-emerald-600'
-                : 'bg-white/[0.04] text-slate-400 border-white/[0.08] hover:border-emerald-500/40 hover:text-slate-200'
+                ? 'bg-sky-600 text-white border-sky-600'
+                : 'bg-white/[0.04] text-slate-400 border-white/[0.08] hover:border-sky-500/40 hover:text-slate-200'
             }`}
           >
             <User className="w-4 h-4 inline mr-1.5" /> Human
@@ -88,8 +88,8 @@ export function AgentPaymentWidget({ agents }: AgentPaymentWidgetProps) {
             onClick={() => setToType('agent')}
             className={`flex-1 py-2.5 text-sm rounded-xl border font-medium transition-colors ${
               toType === 'agent'
-                ? 'bg-emerald-600 text-white border-emerald-600'
-                : 'bg-white/[0.04] text-slate-400 border-white/[0.08] hover:border-emerald-500/40 hover:text-slate-200'
+                ? 'bg-sky-600 text-white border-sky-600'
+                : 'bg-white/[0.04] text-slate-400 border-white/[0.08] hover:border-sky-500/40 hover:text-slate-200'
             }`}
           >
             <Bot className="w-4 h-4 inline mr-1.5" /> Agent
@@ -155,7 +155,7 @@ export function AgentPaymentWidget({ agents }: AgentPaymentWidgetProps) {
         <button
           onClick={handlePay}
           disabled={loading || !fromAgent || !amount}
-          className="w-full bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white py-2.5 rounded-xl text-sm font-semibold disabled:opacity-50 flex items-center justify-center gap-2 shadow-lg shadow-emerald-900/30"
+          className="w-full bg-gradient-to-r from-sky-600 to-sky-500 hover:from-sky-500 hover:to-sky-400 text-white py-2.5 rounded-xl text-sm font-semibold disabled:opacity-50 flex items-center justify-center gap-2 shadow-lg shadow-sky-900/30"
         >
           {loading ? (
             'Sending on HashKey...'
@@ -167,15 +167,15 @@ export function AgentPaymentWidget({ agents }: AgentPaymentWidgetProps) {
         </button>
 
         {result && (
-          <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-3 flex items-start gap-2">
-            <CheckCircle className="w-4 h-4 text-emerald-400 mt-0.5 shrink-0" />
+          <div className="bg-sky-500/10 border border-sky-500/20 rounded-xl p-3 flex items-start gap-2">
+            <CheckCircle className="w-4 h-4 text-sky-400 mt-0.5 shrink-0" />
             <div>
-              <p className="text-sm font-medium text-emerald-400">Payment sent on HashKey Chain</p>
+              <p className="text-sm font-medium text-sky-400">Payment sent on HashKey Chain</p>
               <a
                 href={result.txUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xs text-emerald-400/70 flex items-center gap-1 mt-1 hover:text-emerald-400"
+                className="text-xs text-sky-400/70 flex items-center gap-1 mt-1 hover:text-sky-400"
               >
                 View on Explorer <ExternalLink className="w-3 h-3" />
               </a>
