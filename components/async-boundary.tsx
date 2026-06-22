@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, AnimatePresence } from "motion/react"
+import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Loader2, AlertTriangle, Inbox } from "lucide-react"
 
