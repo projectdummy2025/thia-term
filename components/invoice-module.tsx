@@ -78,7 +78,7 @@ interface LineItem {
 const statusConfig: Record<string, { label: string; color: string; icon: React.ElementType }> = {
   draft: { label: "Draft", color: "bg-slate-500/10 text-slate-400 border border-slate-500/20", icon: FileEdit },
   pending: { label: "Pending", color: "bg-amber-500/10 text-amber-400 border border-amber-500/20", icon: Clock },
-  paid: { label: "Paid", color: "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20", icon: CheckCircle2 },
+  paid: { label: "Paid", color: "bg-sky-500/10 text-sky-400 border border-sky-500/20", icon: CheckCircle2 },
   overdue: { label: "Overdue", color: "bg-red-500/10 text-red-400 border border-red-500/20", icon: AlertCircle },
   cancelled: { label: "Cancelled", color: "bg-slate-500/10 text-slate-500 border border-slate-500/20", icon: AlertTriangle },
 }
@@ -205,7 +205,7 @@ function CreateInvoiceModal({ open, onClose, onCreated, agents }: CreateInvoiceM
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-[#0f172a] border border-white/10">
         <DialogHeader>
           <DialogTitle className="text-white flex items-center gap-2">
-            <FileText className="h-5 w-5 text-emerald-400" />
+            <FileText className="h-5 w-5 text-sky-400" />
             New Invoice
           </DialogTitle>
           <DialogDescription className="text-slate-500">
@@ -223,16 +223,16 @@ function CreateInvoiceModal({ open, onClose, onCreated, agents }: CreateInvoiceM
                 className={cn(
                   "w-7 h-7 rounded-full flex items-center justify-center text-xs font-semibold transition-colors",
                   s === step
-                    ? "bg-emerald-500 text-white"
+                    ? "bg-sky-500 text-white"
                     : s < step
-                    ? "bg-emerald-500/20 text-emerald-400"
+                    ? "bg-sky-500/20 text-sky-400"
                     : "bg-white/[0.06] text-slate-500"
                 )}
               >
                 {s < step ? <CheckCircle className="h-4 w-4" /> : s}
               </div>
               {s < 3 && (
-                <div className={cn("h-px w-8", s < step ? "bg-emerald-500/40" : "bg-white/[0.06]")} />
+                <div className={cn("h-px w-8", s < step ? "bg-sky-500/40" : "bg-white/[0.06]")} />
               )}
             </div>
           ))}
@@ -249,7 +249,7 @@ function CreateInvoiceModal({ open, onClose, onCreated, agents }: CreateInvoiceM
                   placeholder="Acme Corp"
                   value={recipientName}
                   onChange={(e) => setRecipientName(e.target.value)}
-                  className="bg-white/[0.04] border-white/10 text-white placeholder:text-slate-600 focus:border-emerald-500/50 rounded-xl"
+                  className="bg-white/[0.04] border-white/10 text-white placeholder:text-slate-600 focus:border-sky-500/50 rounded-xl"
                 />
               </div>
               <div className="space-y-1.5">
@@ -258,7 +258,7 @@ function CreateInvoiceModal({ open, onClose, onCreated, agents }: CreateInvoiceM
                   placeholder="client@example.com or 0x..."
                   value={recipientEmail}
                   onChange={(e) => setRecipientEmail(e.target.value)}
-                  className="bg-white/[0.04] border-white/10 text-white placeholder:text-slate-600 focus:border-emerald-500/50 rounded-xl"
+                  className="bg-white/[0.04] border-white/10 text-white placeholder:text-slate-600 focus:border-sky-500/50 rounded-xl"
                 />
               </div>
             </div>
@@ -269,7 +269,7 @@ function CreateInvoiceModal({ open, onClose, onCreated, agents }: CreateInvoiceM
                 <Input
                   value={invoiceNumber}
                   onChange={(e) => setInvoiceNumber(e.target.value)}
-                  className="bg-white/[0.04] border-white/10 text-white placeholder:text-slate-600 focus:border-emerald-500/50 rounded-xl font-mono text-sm"
+                  className="bg-white/[0.04] border-white/10 text-white placeholder:text-slate-600 focus:border-sky-500/50 rounded-xl font-mono text-sm"
                 />
               </div>
               <div className="space-y-1.5">
@@ -281,7 +281,7 @@ function CreateInvoiceModal({ open, onClose, onCreated, agents }: CreateInvoiceM
                   type="date"
                   value={issueDate}
                   onChange={(e) => setIssueDate(e.target.value)}
-                  className="bg-white/[0.04] border-white/10 text-white placeholder:text-slate-600 focus:border-emerald-500/50 rounded-xl"
+                  className="bg-white/[0.04] border-white/10 text-white placeholder:text-slate-600 focus:border-sky-500/50 rounded-xl"
                 />
               </div>
               <div className="space-y-1.5">
@@ -293,7 +293,7 @@ function CreateInvoiceModal({ open, onClose, onCreated, agents }: CreateInvoiceM
                   type="date"
                   value={dueDate}
                   onChange={(e) => setDueDate(e.target.value)}
-                  className="bg-white/[0.04] border-white/10 text-white placeholder:text-slate-600 focus:border-emerald-500/50 rounded-xl"
+                  className="bg-white/[0.04] border-white/10 text-white placeholder:text-slate-600 focus:border-sky-500/50 rounded-xl"
                 />
               </div>
             </div>
@@ -302,7 +302,7 @@ function CreateInvoiceModal({ open, onClose, onCreated, agents }: CreateInvoiceM
               <div className="space-y-1.5">
                 <Label className="text-xs text-slate-400">Currency</Label>
                 <Select value={currency} onValueChange={setCurrency}>
-                  <SelectTrigger className="bg-white/[0.04] border-white/10 text-slate-300 focus:border-emerald-500/50 rounded-xl">
+                  <SelectTrigger className="bg-white/[0.04] border-white/10 text-slate-300 focus:border-sky-500/50 rounded-xl">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent className="bg-[#1e293b] border-white/10 text-slate-300">
@@ -315,7 +315,7 @@ function CreateInvoiceModal({ open, onClose, onCreated, agents }: CreateInvoiceM
               <div className="space-y-1.5">
                 <Label className="text-xs text-slate-400">Network</Label>
                 <Select value={network} onValueChange={setNetwork}>
-                  <SelectTrigger className="bg-white/[0.04] border-white/10 text-slate-300 focus:border-emerald-500/50 rounded-xl">
+                  <SelectTrigger className="bg-white/[0.04] border-white/10 text-slate-300 focus:border-sky-500/50 rounded-xl">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent className="bg-[#1e293b] border-white/10 text-slate-300">
@@ -329,7 +329,7 @@ function CreateInvoiceModal({ open, onClose, onCreated, agents }: CreateInvoiceM
 
             <div className="flex justify-end">
               <Button
-                className="bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white rounded-xl shadow-lg shadow-emerald-900/30"
+                className="bg-gradient-to-r from-sky-600 to-sky-500 hover:from-sky-500 hover:to-sky-400 text-white rounded-xl shadow-lg shadow-sky-900/30"
                 disabled={!canProceedStep1}
                 onClick={() => setStep(2)}
               >
@@ -437,7 +437,7 @@ function CreateInvoiceModal({ open, onClose, onCreated, agents }: CreateInvoiceM
                 placeholder="Payment terms, bank details, or any other notes..."
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
-                className="bg-white/[0.04] border-white/10 text-white placeholder:text-slate-600 focus:border-emerald-500/50 rounded-xl resize-none"
+                className="bg-white/[0.04] border-white/10 text-white placeholder:text-slate-600 focus:border-sky-500/50 rounded-xl resize-none"
                 rows={3}
               />
             </div>
@@ -450,7 +450,7 @@ function CreateInvoiceModal({ open, onClose, onCreated, agents }: CreateInvoiceM
                 Back
               </Button>
               <Button
-                className="bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white rounded-xl shadow-lg shadow-emerald-900/30"
+                className="bg-gradient-to-r from-sky-600 to-sky-500 hover:from-sky-500 hover:to-sky-400 text-white rounded-xl shadow-lg shadow-sky-900/30"
                 disabled={!canProceedStep2}
                 onClick={() => setStep(3)}
               >
@@ -550,7 +550,7 @@ function CreateInvoiceModal({ open, onClose, onCreated, agents }: CreateInvoiceM
                   Save as Draft
                 </Button>
                 <Button
-                  className="bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white rounded-xl shadow-lg shadow-emerald-900/30 gap-1.5"
+                  className="bg-gradient-to-r from-sky-600 to-sky-500 hover:from-sky-500 hover:to-sky-400 text-white rounded-xl shadow-lg shadow-sky-900/30 gap-1.5"
                   disabled={loading}
                   onClick={() => handleSubmit(false)}
                 >
@@ -600,7 +600,7 @@ function InvoiceDetailModal({ invoice, onClose, onMarkPaid }: InvoiceDetailModal
         <DialogHeader>
           <DialogTitle className="text-white flex items-center justify-between pr-6">
             <span className="flex items-center gap-2">
-              <FileText className="h-5 w-5 text-emerald-400" />
+              <FileText className="h-5 w-5 text-sky-400" />
               {invoice.invoiceNumber}
             </span>
             <Badge className={cn("text-xs flex items-center gap-1", cfg.color)}>
@@ -720,7 +720,7 @@ function InvoiceDetailModal({ invoice, onClose, onMarkPaid }: InvoiceDetailModal
             {invoice.status === "pending" && (
               <Button
                 size="sm"
-                className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 hover:bg-emerald-500/20 rounded-xl"
+                className="bg-sky-500/10 border border-sky-500/20 text-sky-400 hover:bg-sky-500/20 rounded-xl"
                 onClick={() => onMarkPaid(invoice)}
               >
                 <CheckCircle className="h-3.5 w-3.5 mr-1.5" /> Mark as Paid
@@ -779,7 +779,7 @@ function RegisterAgentModal({ open, onClose, onCreated }: RegisterAgentModalProp
       <DialogContent className="max-w-md bg-[#0f172a] border border-white/10">
         <DialogHeader>
           <DialogTitle className="text-white flex items-center gap-2">
-            <Bot className="h-5 w-5 text-emerald-400" />
+            <Bot className="h-5 w-5 text-sky-400" />
             Register Agent
           </DialogTitle>
           <DialogDescription className="text-slate-500">
@@ -793,7 +793,7 @@ function RegisterAgentModal({ open, onClose, onCreated }: RegisterAgentModalProp
               placeholder="My Invoice Bot"
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
-              className="bg-white/[0.04] border-white/10 text-white placeholder:text-slate-600 focus:border-emerald-500/50 rounded-xl"
+              className="bg-white/[0.04] border-white/10 text-white placeholder:text-slate-600 focus:border-sky-500/50 rounded-xl"
             />
           </div>
           <div className="space-y-1.5">
@@ -802,7 +802,7 @@ function RegisterAgentModal({ open, onClose, onCreated }: RegisterAgentModalProp
               placeholder="What this agent does..."
               value={form.description}
               onChange={(e) => setForm({ ...form, description: e.target.value })}
-              className="bg-white/[0.04] border-white/10 text-white placeholder:text-slate-600 focus:border-emerald-500/50 rounded-xl resize-none"
+              className="bg-white/[0.04] border-white/10 text-white placeholder:text-slate-600 focus:border-sky-500/50 rounded-xl resize-none"
               rows={2}
             />
           </div>
@@ -812,7 +812,7 @@ function RegisterAgentModal({ open, onClose, onCreated }: RegisterAgentModalProp
               placeholder="0x... (auto-derived if blank)"
               value={form.walletAddress}
               onChange={(e) => setForm({ ...form, walletAddress: e.target.value })}
-              className="bg-white/[0.04] border-white/10 text-white placeholder:text-slate-600 focus:border-emerald-500/50 rounded-xl font-mono text-sm"
+              className="bg-white/[0.04] border-white/10 text-white placeholder:text-slate-600 focus:border-sky-500/50 rounded-xl font-mono text-sm"
             />
           </div>
           <div className="space-y-1.5">
@@ -821,7 +821,7 @@ function RegisterAgentModal({ open, onClose, onCreated }: RegisterAgentModalProp
               placeholder="invoicing, payroll, billing"
               value={form.capabilitiesText}
               onChange={(e) => setForm({ ...form, capabilitiesText: e.target.value })}
-              className="bg-white/[0.04] border-white/10 text-white placeholder:text-slate-600 focus:border-emerald-500/50 rounded-xl"
+              className="bg-white/[0.04] border-white/10 text-white placeholder:text-slate-600 focus:border-sky-500/50 rounded-xl"
             />
           </div>
           <div className="flex justify-end gap-2 pt-1">
@@ -832,7 +832,7 @@ function RegisterAgentModal({ open, onClose, onCreated }: RegisterAgentModalProp
               Cancel
             </Button>
             <Button
-              className="bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white rounded-xl shadow-lg shadow-emerald-900/30"
+              className="bg-gradient-to-r from-sky-600 to-sky-500 hover:from-sky-500 hover:to-sky-400 text-white rounded-xl shadow-lg shadow-sky-900/30"
               disabled={!form.name || loading}
               onClick={handleSubmit}
             >
@@ -915,18 +915,18 @@ export function InvoiceModule() {
 
       {/* Payment URL banner */}
       {createdPaymentUrl && (
-        <div className="flex items-center justify-between gap-4 p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl">
+        <div className="flex items-center justify-between gap-4 p-4 bg-sky-500/10 border border-sky-500/20 rounded-2xl">
           <div className="flex items-center gap-3 min-w-0">
-            <CheckCircle className="h-5 w-5 text-emerald-400 shrink-0" />
+            <CheckCircle className="h-5 w-5 text-sky-400 shrink-0" />
             <div className="min-w-0">
-              <p className="text-emerald-400 font-semibold text-sm">Invoice sent — share this link with your client</p>
-              <p className="font-mono text-xs text-emerald-400/60 truncate">{createdPaymentUrl}</p>
+              <p className="text-sky-400 font-semibold text-sm">Invoice sent — share this link with your client</p>
+              <p className="font-mono text-xs text-sky-400/60 truncate">{createdPaymentUrl}</p>
             </div>
           </div>
           <div className="flex gap-2 shrink-0">
             <Button
               size="sm"
-              className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 hover:bg-emerald-500/20 rounded-xl"
+              className="bg-sky-500/10 border border-sky-500/20 text-sky-400 hover:bg-sky-500/20 rounded-xl"
               onClick={() => { navigator.clipboard.writeText(createdPaymentUrl); toast.success("Copied!") }}
             >
               <Copy className="h-3 w-3 mr-1" /> Copy
@@ -1027,7 +1027,7 @@ export function InvoiceModule() {
             </TabsTrigger>
           </TabsList>
           <Button
-            className="bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white rounded-xl shadow-lg shadow-emerald-900/30 gap-2 px-5"
+            className="bg-gradient-to-r from-sky-600 to-sky-500 hover:from-sky-500 hover:to-sky-400 text-white rounded-xl shadow-lg shadow-sky-900/30 gap-2 px-5"
             onClick={() => setShowCreate(true)}
           >
             <Plus className="h-4 w-4" />
@@ -1084,12 +1084,12 @@ export function InvoiceModule() {
                   className="w-14 h-14 rounded-2xl flex items-center justify-center mb-4"
                   style={{ background: "linear-gradient(135deg, #0a2e2e, #0f3d3d)" }}
                 >
-                  <FileText className="h-7 w-7 text-emerald-400" />
+                  <FileText className="h-7 w-7 text-sky-400" />
                 </div>
                 <p className="text-white font-semibold text-base">No invoices yet</p>
                 <p className="text-slate-500 text-sm mt-1 max-w-xs">Create your first invoice to start getting paid on-chain.</p>
                 <Button
-                  className="mt-5 bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white rounded-xl shadow-lg shadow-emerald-900/30 gap-2"
+                  className="mt-5 bg-gradient-to-r from-sky-600 to-sky-500 hover:from-sky-500 hover:to-sky-400 text-white rounded-xl shadow-lg shadow-sky-900/30 gap-2"
                   onClick={() => setShowCreate(true)}
                 >
                   <Plus className="h-4 w-4" />
@@ -1107,8 +1107,8 @@ export function InvoiceModule() {
                       onClick={() => setSelectedInvoice(inv)}
                     >
                       {/* Icon */}
-                      <div className="w-10 h-10 rounded-xl bg-white/[0.04] flex items-center justify-center shrink-0 group-hover:bg-emerald-500/10 transition-colors">
-                        <FileText className="h-4.5 w-4.5 text-slate-500 group-hover:text-emerald-400 transition-colors" />
+                      <div className="w-10 h-10 rounded-xl bg-white/[0.04] flex items-center justify-center shrink-0 group-hover:bg-sky-500/10 transition-colors">
+                        <FileText className="h-4.5 w-4.5 text-slate-500 group-hover:text-sky-400 transition-colors" />
                       </div>
 
                       {/* Invoice info */}
@@ -1164,7 +1164,7 @@ export function InvoiceModule() {
                             <Button
                               size="sm"
                               variant="ghost"
-                              className="h-8 w-8 p-0 text-emerald-500 hover:text-emerald-400 hover:bg-emerald-500/10"
+                              className="h-8 w-8 p-0 text-sky-500 hover:text-sky-400 hover:bg-sky-500/10"
                               onClick={(e) => { e.stopPropagation(); markAsPaid(inv) }}
                             >
                               <CheckCircle className="h-3.5 w-3.5" />
@@ -1198,12 +1198,12 @@ export function InvoiceModule() {
                   className="w-14 h-14 rounded-2xl flex items-center justify-center mb-4"
                   style={{ background: "linear-gradient(135deg, #0a2e2e, #0f3d3d)" }}
                 >
-                  <Bot className="h-7 w-7 text-emerald-400" />
+                  <Bot className="h-7 w-7 text-sky-400" />
                 </div>
                 <p className="text-white font-semibold">No agents registered</p>
                 <p className="text-slate-500 text-sm mt-1">Register an AI agent to issue invoices autonomously</p>
                 <Button
-                  className="mt-4 bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white rounded-xl shadow-lg shadow-emerald-900/30 gap-1.5"
+                  className="mt-4 bg-gradient-to-r from-sky-600 to-sky-500 hover:from-sky-500 hover:to-sky-400 text-white rounded-xl shadow-lg shadow-sky-900/30 gap-1.5"
                   onClick={() => setShowRegisterAgent(true)}
                 >
                   <Plus className="h-4 w-4" />
@@ -1225,7 +1225,7 @@ export function InvoiceModule() {
                         {agent.description && <p className="text-slate-500 text-xs mt-0.5">{agent.description}</p>}
                       </div>
                     </div>
-                    <Badge className="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs">
+                    <Badge className="bg-sky-500/10 text-sky-400 border border-sky-500/20 text-xs">
                       {agent.status}
                     </Badge>
                   </div>
