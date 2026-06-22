@@ -30,29 +30,33 @@ export function PaymentFlow({ paymentLink }: PaymentFlowProps) {
   const [amount, setAmount] = useState(paymentLink.amountMin.toString())
   const [sending, setSending] = useState(false)
   const [done, setDone] = useState(false)
+  const [txHash, setTxHash] = useState<string | null>(null)
+  const [payerAddress, setPayerAddress] = useState("")
+  const [payerName, setPayerName] = useState("")
 
   const networkName = paymentLink.network
   const tokenSymbol = paymentLink.sourceToken
 
   const handlePay = async () => {
-    if (!session) {
-      router.push(`/login?redirect=/l/${paymentLink.code}`)
+    if (!payerAddress || !payerAddress.match(/^0x[a-fA-F0-9]{40}$/)) {
+      alert("Please enter a valid wallet address")
       return
     }
+
     setSending(true)
     try {
-      const res = await fetch("/api/payments", {
+      const res = await fetch(`/api/payment-links/${paymentLink.code}/pay`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          paymentLinkId: paymentLink.id,
+          payerAddress,
+          payerName: payerName || undefined,
           amount: parseFloat(amount),
-          currency: tokenSymbol,
-          network: networkName,
         }),
       })
       const data = await res.json()
       if (data.success) {
+        setTxHash(data.data?.txHash || null)
         setDone(true)
       } else {
         alert(data.error || "Payment failed")
@@ -68,8 +72,14 @@ export function PaymentFlow({ paymentLink }: PaymentFlowProps) {
     return (
       <div className="bg-white rounded-2xl border border-sky-200 shadow-sm p-8 text-center space-y-3">
         <CheckCircle className="h-12 w-12 text-sky-500 mx-auto" />
-        <p className="text-lg font-semibold text-slate-900">Payment recorded</p>
-        <p className="text-sm text-slate-500">Your payment has been submitted for processing.</p>
+        <p className="text-lg font-semibold text-slate-900">Payment Successful!</p>
+        <p className="text-sm text-slate-500">Your payment has been processed via T3N TEE.</p>
+        {txHash && (
+          <div className="mt-4 p-3 bg-slate-50 rounded-lg">
+            <p className="text-xs text-slate-500 mb-1">Transaction Hash</p>
+            <p className="text-xs font-mono text-slate-700 break-all">{txHash}</p>
+          </div>
+        )}
       </div>
     )
   }
@@ -85,6 +95,26 @@ export function PaymentFlow({ paymentLink }: PaymentFlowProps) {
       </div>
 
       <div className="space-y-4">
+        <div>
+          <Label className="text-sm font-medium text-slate-700">Your Name (optional)</Label>
+          <Input
+            type="text"
+            placeholder="John Doe"
+            value={payerName}
+            onChange={(e) => setPayerName(e.target.value)}
+            className="mt-1.5"
+          />
+        </div>
+        <div>
+          <Label className="text-sm font-medium text-slate-700">Your Wallet Address</Label>
+          <Input
+            type="text"
+            placeholder="0x..."
+            value={payerAddress}
+            onChange={(e) => setPayerAddress(e.target.value)}
+            className="mt-1.5 font-mono text-sm"
+          />
+        </div>
         <div>
           <Label className="text-sm font-medium text-slate-700">Amount ({tokenSymbol})</Label>
           <Input
@@ -105,13 +135,13 @@ export function PaymentFlow({ paymentLink }: PaymentFlowProps) {
 
       <Button
         onClick={handlePay}
-        disabled={sending}
+        disabled={sending || !payerAddress}
         className="w-full bg-sky-600 hover:bg-sky-700 text-white h-11 font-semibold"
       >
         {sending ? (
-          <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Processing...</>
+          <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Processing via T3N TEE...</>
         ) : (
-          <><ArrowRight className="mr-2 h-4 w-4" /> {session ? "Pay Now" : "Sign in to Pay"}</>
+          <><ArrowRight className="mr-2 h-4 w-4" /> Pay with T3N</>
         )}
       </Button>
     </div>

@@ -70,7 +70,7 @@ interface PayrollBatch {
   totalAmount: string
   currency: string
   recipients: number
-  status: "draft" | "processing" | "completed" | "failed"
+  status: "draft" | "pending" | "processing" | "completed" | "failed"
   created: string
   scheduled: string
   completedAt?: string
@@ -133,6 +133,24 @@ export function PayrollRailsModule() {
       console.error("Failed to fetch payroll batches", e)
     } finally {
       setLoadingBatches(false)
+    }
+  }
+
+  const executeBatch = async (batchId: string) => {
+    try {
+      const res = await fetch(`/api/payroll/${batchId}/execute`, {
+        method: 'POST',
+      })
+      const json = await res.json()
+      if (json.success) {
+        toast.success(`Payroll executed: ${json.data.successCount}/${json.data.totalRecipients} payments succeeded`)
+        await fetchBatches()
+      } else {
+        toast.error(json.error || 'Execution failed')
+      }
+    } catch (e) {
+      console.error('Payroll execution error:', e)
+      toast.error('Execution failed - check console')
     }
   }
 
@@ -268,7 +286,12 @@ export function PayrollRailsModule() {
               <div className="text-center py-12 text-muted-foreground">No payroll batches yet. Create your first batch.</div>
             ) : (
               payrollBatches.map((batch) => (
-                <PayrollBatchCard key={batch.id} batch={batch} onSelect={setSelectedBatch} />
+                <PayrollBatchCard
+                  key={batch.id}
+                  batch={batch}
+                  onSelect={setSelectedBatch}
+                  onExecute={executeBatch}
+                />
               ))
             )}
           </div>
@@ -316,7 +339,29 @@ export function PayrollRailsModule() {
   )
 }
 
-function PayrollBatchCard({ batch, onSelect }: { batch: PayrollBatch; onSelect: (batch: PayrollBatch) => void }) {
+function PayrollBatchCard({
+  batch,
+  onSelect,
+  onExecute,
+}: {
+  batch: PayrollBatch
+  onSelect: (batch: PayrollBatch) => void
+  onExecute: (batchId: string) => Promise<void>
+}) {
+  const [executing, setExecuting] = useState(false)
+
+  const handleExecute = async (e: React.MouseEvent) => {
+    e.stopPropagation()
+    if (!confirm(`Execute payroll batch "${batch.name}"? This will process ${batch.recipients} payments via T3N TEE.`)) {
+      return
+    }
+    setExecuting(true)
+    try {
+      await onExecute(batch.id)
+    } finally {
+      setExecuting(false)
+    }
+  }
   const getStatusColor = (status: string) => {
     switch (status) {
       case "completed":
@@ -380,14 +425,22 @@ function PayrollBatchCard({ batch, onSelect }: { batch: PayrollBatch; onSelect: 
           </div>
           <div className="flex items-center gap-3">
             {getStatusIcon(batch.status)}
-            <Button variant="outline" size="sm">
+            <Button variant="outline" size="sm" onClick={(e) => { e.stopPropagation(); onSelect(batch) }}>
               <Eye className="h-4 w-4 mr-2" />
               Details
             </Button>
-            {batch.status === "draft" && (
-              <Button size="sm" className="bg-primary hover:bg-primary/90">
-                <Send className="h-4 w-4 mr-2" />
-                Process
+            {(batch.status === "pending" || batch.status === "draft") && (
+              <Button
+                size="sm"
+                className="bg-sky-600 hover:bg-sky-500 text-white"
+                onClick={handleExecute}
+                disabled={executing}
+              >
+                {executing ? (
+                  <><Loader2 className="h-4 w-4 mr-2 animate-spin" />Executing...</>
+                ) : (
+                  <><Send className="h-4 w-4 mr-2" />Execute via T3N</>
+                )}
               </Button>
             )}
           </div>
