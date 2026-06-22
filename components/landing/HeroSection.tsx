@@ -47,7 +47,7 @@ export function HeroSection() {
       <div className="relative z-10 container mx-auto px-5 sm:px-8 pt-24 sm:pt-28 pb-20 sm:pb-24 max-w-6xl">
         {/* Badge */}
         <div className="hero-fade-1 inline-flex items-center gap-2 bg-white/[0.08] border border-white/15 rounded-full px-3.5 py-1.5 text-xs sm:text-sm text-white/80 mb-8 sm:mb-10">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+          <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />
           Powered by T3N
         </div>
 
@@ -88,7 +88,7 @@ export function HeroSection() {
         <span className="text-xs text-white/35 tracking-widest uppercase font-medium">
           Scroll to explore
         </span>
-        <div className="bounce-dot w-1.5 h-1.5 rounded-full bg-emerald-400/60" />
+        <div className="bounce-dot w-1.5 h-1.5 rounded-full bg-sky-400/60" />
       </div>
     </section>
   )
