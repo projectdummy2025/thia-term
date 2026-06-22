@@ -13,8 +13,8 @@
   50%      { transform: translateY(-10px); }
 }
 @keyframes glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.3); }
-  50%      { box-shadow: 0 0 30px rgba(16, 185, 129, 0.6); }
+  0%, 100% { box-shadow: 0 0 20px rgba(14, 165, 233, 0.3); }
+  50%      { box-shadow: 0 0 30px rgba(14, 165, 233, 0.6); }
 }
 @keyframes slideInFromLeft {
   0%   { transform: translateX(-100%); opacity: 0; }
@@ -52,12 +52,12 @@
   --color-glass-border: rgba(255, 255, 255, 0.05);
   --color-glass-hover: rgba(255, 255, 255, 0.08);
 
-  /* Brand — emerald */
-  --color-brand: 152 69% 52%;        /* #34d399 */
-  --color-brand-hover: 152 60% 45%;  /* #10b981 */
-  --color-brand-soft: rgba(16, 185, 129, 0.08);
-  --color-brand-soft-2: rgba(16, 185, 129, 0.12);
-  --color-brand-glow: rgba(16, 185, 129, 0.25);
+  /* Brand — sky blue */
+  --color-brand: 199 89% 48%;        /* #0ea5e9 */
+  --color-brand-hover: 199 89% 38%;  /* #0284c7 */
+  --color-brand-soft: rgba(14, 165, 233, 0.08);
+  --color-brand-soft-2: rgba(14, 165, 233, 0.12);
+  --color-brand-glow: rgba(14, 165, 233, 0.25);
 
   /* Lines */
   --color-line: rgba(255, 255, 255, 0.06);
@@ -78,7 +78,7 @@
   --card-foreground: 240 10% 3.9%;
   --popover: 0 0% 100%;
   --popover-foreground: 240 10% 3.9%;
-  --primary: 142.1 76.2% 36.3%;
+  --primary: 199 89% 48%;
   --primary-foreground: 355.7 100% 97.3%;
   --secondary: 240 4.8% 95.9%;
   --secondary-foreground: 240 5.9% 10%;
@@ -90,7 +90,7 @@
   --destructive-foreground: 0 0% 98%;
   --border: 240 5.9% 90%;
   --input: 240 5.9% 90%;
-  --ring: 142.1 76.2% 36.3%;
+  --ring: 199 89% 48%;
   --radius: 0.75rem;
 }
 
@@ -101,19 +101,19 @@
   --card-foreground: 210 40% 98%;
   --popover: 222 40% 12%;
   --popover-foreground: 210 40% 98%;
-  --primary: 152 69% 52%;
+  --primary: 199 89% 48%;
   --primary-foreground: 222 47% 8%;
   --secondary: 222 30% 16%;
   --secondary-foreground: 210 40% 90%;
   --muted: 222 30% 14%;
   --muted-foreground: 215 20% 50%;
-  --accent: 162 50% 20%;
-  --accent-foreground: 152 69% 70%;
+  --accent: 200 70% 20%;
+  --accent-foreground: 199 89% 70%;
   --destructive: 0 62% 40%;
   --destructive-foreground: 0 0% 98%;
   --border: 222 30% 14%;
   --input: 222 30% 14%;
-  --ring: 152 69% 52%;
+  --ring: 199 89% 48%;
 }
 
 /* ── Layer Base ──────────────────────────────────── */
@@ -142,29 +142,29 @@
   .card-ghost { @apply rounded-2xl border border-white/[0.04] bg-white/[0.02]; }
   .card-subtle { @apply rounded-xl border border-white/[0.06] bg-white/[0.02]; }
 
-  /* ── Emerald brand ─── */
-  .bg-brand-gradient { background: linear-gradient(135deg, #059669 0%, #10b981 50%, #34d399 100%); }
+  /* ── Sky blue brand ─── */
+  .bg-brand-gradient { background: linear-gradient(135deg, #0284c7 0%, #0ea5e9 50%, #38bdf8 100%); }
   .shadow-brand-glow { box-shadow: 0 0 20px var(--color-brand-glow); }
-  .btn-emerald { @apply bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white shadow-lg shadow-emerald-900/30 rounded-xl; }
-  .badge-emerald { @apply bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs px-2 py-0.5 rounded-full font-medium; }
+  .btn-sky { @apply bg-gradient-to-r from-sky-600 to-sky-500 hover:from-sky-500 hover:to-sky-400 text-white shadow-lg shadow-sky-900/30 rounded-xl; }
+  .badge-sky { @apply bg-sky-500/10 text-sky-400 border border-sky-500/20 text-xs px-2 py-0.5 rounded-full font-medium; }
   .badge-amber { @apply bg-amber-500/10 text-amber-400 border border-amber-500/20 text-xs px-2 py-0.5 rounded-full font-medium; }
   .badge-red { @apply bg-red-500/10 text-red-400 border border-red-500/20 text-xs px-2 py-0.5 rounded-full font-medium; }
 
   /* ── Icon wells ─── */
-  .icon-well { @apply w-12 h-12 rounded-xl flex items-center justify-center shrink-0 shadow-lg; background: linear-gradient(135deg, #0a2e2e 0%, #0f3d3d 100%); }
-  .icon-well-sm { @apply w-9 h-9 rounded-lg flex items-center justify-center shrink-0; background: linear-gradient(135deg, #0a2e2e 0%, #0f3d3d 100%); }
-  .icon-well-empty { @apply w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg; background: linear-gradient(135deg, #0a2e2e, #0f3d3d); }
+  .icon-well { @apply w-12 h-12 rounded-xl flex items-center justify-center shrink-0 shadow-lg; background: linear-gradient(135deg, #0c4a6e 0%, #075985 100%); }
+  .icon-well-sm { @apply w-9 h-9 rounded-lg flex items-center justify-center shrink-0; background: linear-gradient(135deg, #0c4a6e 0%, #075985 100%); }
+  .icon-well-empty { @apply w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg; background: linear-gradient(135deg, #0c4a6e, #075985); }
 
   /* ── Input / field ─── */
-  .field-glass { @apply bg-white/[0.04] border-white/[0.08] text-white placeholder:text-slate-600 focus:border-emerald-500/40 focus:bg-white/[0.06]; }
+  .field-glass { @apply bg-white/[0.04] border-white/[0.08] text-white placeholder:text-slate-600 focus:border-sky-500/40 focus:bg-white/[0.06]; }
   .field-disabled { @apply bg-white/[0.02] border-white/[0.06] text-slate-400 cursor-default; }
 
   /* ── Dashboard background ─── */
   .bg-dashboard {
     background-color: hsl(222 47% 8%);
     background-image:
-      radial-gradient(ellipse 80% 50% at 15% 40%, rgba(16,185,129,0.08) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 40% at 85% 15%, rgba(16,185,129,0.05) 0%, transparent 55%),
-      radial-gradient(ellipse 50% 40% at 50% 80%, rgba(16,185,129,0.04) 0%, transparent 50%);
+      radial-gradient(ellipse 80% 50% at 15% 40%, rgba(14,165,233,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 85% 15%, rgba(14,165,233,0.05) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 40% at 50% 80%, rgba(14,165,233,0.04) 0%, transparent 50%);
   }
 }
