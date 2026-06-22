@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react"
-import { Bot, ArrowRight, CheckCircle, ExternalLink, Zap } from "lucide-react"
+import { Bot, CheckCircle, ExternalLink, User } from "lucide-react"
 
 interface AgentPaymentWidgetProps {
   agents: { id: string; name: string; walletAddress?: string | null }[]
@@ -48,14 +48,9 @@ export function AgentPaymentWidget({ agents }: AgentPaymentWidgetProps) {
 
   return (
     <div className="bg-white/[0.03] border border-white/[0.08] rounded-2xl p-6">
-      <div className="flex items-center gap-3 mb-6">
-        <div className="w-10 h-10 bg-emerald-500/10 rounded-xl flex items-center justify-center">
-          <Bot className="w-5 h-5 text-emerald-400" />
-        </div>
-        <div>
-          <h3 className="font-semibold text-white">Agent Payments</h3>
-          <p className="text-sm text-slate-500">Autonomous on-chain settlements on HashKey</p>
-        </div>
+      <div className="mb-6">
+        <h3 className="font-semibold text-white">Agent Payments</h3>
+        <p className="text-sm text-slate-500">Autonomous on-chain settlements on HashKey</p>
       </div>
 
       <div className="space-y-4">
@@ -65,11 +60,12 @@ export function AgentPaymentWidget({ agents }: AgentPaymentWidgetProps) {
           <select
             value={fromAgent}
             onChange={(e) => setFromAgent(e.target.value)}
-            className="w-full border border-white/[0.08] rounded-xl px-3 py-2 text-sm bg-white/[0.04] text-white"
+            className="w-full border border-white/[0.08] rounded-xl px-4 py-3 text-sm bg-white/[0.04] text-white appearance-none cursor-pointer bg-[length:16px_16px] bg-[right_12px_center] bg-no-repeat"
+            style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%239b9ba5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='4 6 8 10 12 6'/%3E%3C/svg%3E")` }}
           >
-            <option value="" className="bg-[#1e293b]">Select agent...</option>
+            <option value="" className="bg-[#0f172a] text-slate-400">Select agent...</option>
             {agents.map((a) => (
-              <option key={a.id} value={a.id} className="bg-[#1e293b]">
+              <option key={a.id} value={a.id} className="bg-[#0f172a]">
                 {a.name}
               </option>
             ))}
@@ -80,23 +76,23 @@ export function AgentPaymentWidget({ agents }: AgentPaymentWidgetProps) {
         <div className="flex gap-2">
           <button
             onClick={() => setToType('human')}
-            className={`flex-1 py-2 text-sm rounded-xl border font-medium transition-colors ${
+            className={`flex-1 py-2.5 text-sm rounded-xl border font-medium transition-colors ${
               toType === 'human'
                 ? 'bg-emerald-600 text-white border-emerald-600'
                 : 'bg-white/[0.04] text-slate-400 border-white/[0.08] hover:border-emerald-500/40 hover:text-slate-200'
             }`}
           >
-            → Human
+            <User className="w-4 h-4 inline mr-1.5" /> Human
           </button>
           <button
             onClick={() => setToType('agent')}
-            className={`flex-1 py-2 text-sm rounded-xl border font-medium transition-colors ${
+            className={`flex-1 py-2.5 text-sm rounded-xl border font-medium transition-colors ${
               toType === 'agent'
                 ? 'bg-emerald-600 text-white border-emerald-600'
                 : 'bg-white/[0.04] text-slate-400 border-white/[0.08] hover:border-emerald-500/40 hover:text-slate-200'
             }`}
           >
-            → Agent <Zap className="inline w-3 h-3" />
+            <Bot className="w-4 h-4 inline mr-1.5" /> Agent
           </button>
         </div>
 
@@ -106,19 +102,20 @@ export function AgentPaymentWidget({ agents }: AgentPaymentWidgetProps) {
             value={toAddress}
             onChange={(e) => setToAddress(e.target.value)}
             placeholder="Recipient wallet 0x..."
-            className="w-full border border-white/[0.08] rounded-xl px-3 py-2 text-sm bg-white/[0.04] text-white placeholder:text-slate-600"
+            className="w-full border border-white/[0.08] rounded-xl px-4 py-3 text-sm bg-white/[0.04] text-white placeholder:text-slate-600"
           />
         ) : (
           <select
             value={toAgent}
             onChange={(e) => setToAgent(e.target.value)}
-            className="w-full border border-white/[0.08] rounded-xl px-3 py-2 text-sm bg-white/[0.04] text-white"
+            className="w-full border border-white/[0.08] rounded-xl px-4 py-3 text-sm bg-white/[0.04] text-white appearance-none cursor-pointer bg-[length:16px_16px] bg-[right_12px_center] bg-no-repeat"
+            style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%239b9ba5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='4 6 8 10 12 6'/%3E%3C/svg%3E")` }}
           >
-            <option value="" className="bg-[#1e293b]">Select destination agent...</option>
+            <option value="" className="bg-[#0f172a] text-slate-400">Select destination agent...</option>
             {agents
               .filter((a) => a.id !== fromAgent)
               .map((a) => (
-                <option key={a.id} value={a.id} className="bg-[#1e293b]">
+                <option key={a.id} value={a.id} className="bg-[#0f172a]">
                   {a.name}
                 </option>
               ))}
@@ -134,12 +131,13 @@ export function AgentPaymentWidget({ agents }: AgentPaymentWidgetProps) {
             type="number"
             min="0"
             step="any"
-            className="flex-1 border border-white/[0.08] rounded-xl px-3 py-2 text-sm bg-white/[0.04] text-white placeholder:text-slate-600"
+            className="flex-1 border border-white/[0.08] rounded-xl px-4 py-3 text-sm bg-white/[0.04] text-white placeholder:text-slate-600"
           />
           <select
             value={token}
             onChange={(e) => setToken(e.target.value)}
-            className="w-28 border border-white/[0.08] rounded-xl px-3 py-2 text-sm bg-white/[0.04] text-white"
+            className="w-28 border border-white/[0.08] rounded-xl px-4 py-3 text-sm bg-white/[0.04] text-white appearance-none cursor-pointer bg-[length:16px_16px] bg-[right_12px_center] bg-no-repeat"
+            style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%239b9ba5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='4 6 8 10 12 6'/%3E%3C/svg%3E")` }}
           >
             <option className="bg-[#1e293b]">HSK</option>
             <option className="bg-[#1e293b]">USDC</option>
@@ -151,7 +149,7 @@ export function AgentPaymentWidget({ agents }: AgentPaymentWidgetProps) {
           value={memo}
           onChange={(e) => setMemo(e.target.value)}
           placeholder="Memo (optional)"
-          className="w-full border border-white/[0.08] rounded-xl px-3 py-2 text-sm bg-white/[0.04] text-white placeholder:text-slate-600"
+          className="w-full border border-white/[0.08] rounded-xl px-4 py-3 text-sm bg-white/[0.04] text-white placeholder:text-slate-600"
         />
 
         <button
@@ -163,7 +161,7 @@ export function AgentPaymentWidget({ agents }: AgentPaymentWidgetProps) {
             'Sending on HashKey...'
           ) : (
             <>
-              <Bot className="w-4 h-4" /> Execute Payment <ArrowRight className="w-4 h-4" />
+              <Bot className="w-4 h-4" /> Execute Payment
             </>
           )}
         </button>

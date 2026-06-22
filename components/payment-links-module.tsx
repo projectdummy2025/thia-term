@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useCallback } from "react"
+import { motion } from "motion/react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
@@ -8,7 +9,7 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
-import { QrCode, Plus, Copy, Shield, CheckCircle, Clock, Loader2, ExternalLink, Link2, Unlink, Share2, TrendingUp, Zap } from "lucide-react"
+import { QrCode, Plus, Copy, Clock, Loader2, ExternalLink, Link2, Unlink, Share2, TrendingUp, Zap, CheckCircle } from "lucide-react"
 import { toast } from "sonner"
 import { cn } from "@/lib/utils"
 
@@ -28,7 +29,7 @@ interface PaymentLink {
 
 function SkeletonLinkCard() {
   return (
-    <div className="rounded-2xl border border-white/[0.06] bg-white/[0.03] p-5 animate-pulse">
+    <div className="card-surface p-5 animate-pulse">
       <div className="flex items-start justify-between gap-4">
         <div className="flex-1 space-y-2">
           <div className="flex items-center gap-2">
@@ -85,6 +86,7 @@ export function PaymentLinksModule() {
   }
 
   const deleteLink = async (id: string) => {
+    if (!confirm('Are you sure you want to delete this link? This cannot be undone.')) return
     await fetch(`/api/payment-links?id=${id}`, { method: 'DELETE' })
     toast.success('Link deleted')
     fetchLinks()
@@ -107,7 +109,7 @@ export function PaymentLinksModule() {
               <Plus className="h-4 w-4 mr-2" /> Create Link
             </Button>
           </DialogTrigger>
-          <DialogContent className="max-w-lg bg-[#0f172a] border border-white/10 text-white">
+          <DialogContent className="max-w-lg bg-glass border border-white/[0.08] text-white">
             <DialogHeader>
               <DialogTitle className="text-white">New Payment Link</DialogTitle>
               <DialogDescription className="text-slate-500">Create a compliant payment link</DialogDescription>
@@ -123,14 +125,20 @@ export function PaymentLinksModule() {
           { label: 'Active Links', value: activeLinks.length.toString(), icon: Zap },
           { label: 'Total Volume', value: `$${links.reduce((s, l) => s + l.totalVolume, 0).toLocaleString()}`, icon: TrendingUp },
           { label: 'Total Payments', value: links.reduce((s, l) => s + l.transactions, 0).toString(), icon: CheckCircle },
-        ].map(({ label, value, icon: Icon }) => (
-          <div key={label} className="rounded-2xl border border-white/[0.06] bg-white/[0.03] p-4">
+        ].map(({ label, value, icon: Icon }, i) => (
+          <motion.div
+            key={label}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.35, delay: 0.1 + i * 0.06 }}
+            className="card-surface p-4"
+          >
             <div className="flex items-center gap-2 mb-1">
               <Icon className="h-3.5 w-3.5 text-emerald-400" />
               <span className="text-xs text-slate-500">{label}</span>
             </div>
             <p className="text-2xl font-bold text-white">{value}</p>
-          </div>
+          </motion.div>
         ))}
       </div>
 
@@ -158,9 +166,8 @@ export function PaymentLinksModule() {
               {[1, 2, 3].map((i) => <SkeletonLinkCard key={i} />)}
             </div>
           ) : activeLinks.length === 0 ? (
-            <div className="text-center py-16 rounded-2xl border border-white/[0.06] bg-white/[0.02]">
-              <div className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4"
-                style={{ background: "linear-gradient(135deg, #0a2e2e, #0f3d3d)" }}>
+            <div className="text-center py-16 card-ghost">
+              <div className="icon-well-empty">
                 <QrCode className="h-7 w-7 text-emerald-400" />
               </div>
               <p className="font-semibold text-slate-300">No active payment links</p>
@@ -173,13 +180,22 @@ export function PaymentLinksModule() {
               </Button>
             </div>
           ) : (
-            activeLinks.map(link => <LinkCard key={link.id} link={link} onCopy={copyLink} onDeactivate={deactivate} onDelete={deleteLink} />)
+            activeLinks.map((link, i) => (
+              <motion.div
+                key={link.id}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: i * 0.04 }}
+              >
+                <LinkCard link={link} onCopy={copyLink} onDeactivate={deactivate} onDelete={deleteLink} />
+              </motion.div>
+            ))
           )}
         </TabsContent>
 
         <TabsContent value="inactive" className="mt-4 space-y-3">
           {inactiveLinks.length === 0 ? (
-            <div className="text-center py-12 rounded-2xl border border-white/[0.06] bg-white/[0.02]">
+            <div className="text-center py-12 card-ghost">
               <Clock className="h-10 w-10 mx-auto mb-3 text-slate-600" />
               <p className="text-sm text-slate-500">No inactive links</p>
             </div>
@@ -198,7 +214,7 @@ function LinkCard({ link, onCopy, onDeactivate, onDelete }: { link: PaymentLink;
 
   return (
     <div className={cn(
-      "rounded-2xl border transition-all hover:border-white/10 p-5 group",
+      "rounded-2xl border transition-all p-5 group",
       isActive ? "border-white/[0.06] bg-white/[0.03] hover:bg-white/[0.05]" : "border-white/[0.04] bg-white/[0.02]"
     )}>
       <div className="flex items-start justify-between gap-4">
@@ -225,14 +241,14 @@ function LinkCard({ link, onCopy, onDeactivate, onDelete }: { link: PaymentLink;
           <p className="text-xs font-mono text-slate-600 mb-3 truncate">{url}</p>
           <div className="flex flex-wrap gap-4 text-xs text-slate-500">
             <span className="flex items-center gap-1">
-              <Shield className="h-3 w-3 text-emerald-600" />
+              <Zap className="h-3 w-3 text-slate-600" />
               {link.sourceToken}
             </span>
             {(link.amountMin || link.amountMax) && (
               <span>{link.amountMin ?? '0'} – {link.amountMax ?? '∞'}</span>
             )}
             <span className="flex items-center gap-1">
-              <CheckCircle className="h-3 w-3 text-slate-600" />
+              <Zap className="h-3 w-3 text-slate-600" />
               {link.transactions} payments
             </span>
             <span className="flex items-center gap-1">
@@ -338,16 +354,16 @@ function CreateLinkForm({ onSuccess }: { onSuccess: () => void }) {
           placeholder="e.g. Conference Ticket"
           value={name}
           onChange={e => setName(e.target.value)}
-          className="bg-white/[0.04] border-white/10 text-white placeholder:text-slate-600 focus:border-emerald-500/50"
+          className="bg-white/[0.04] border-white/10 text-white placeholder:text-slate-600 focus:border-emerald-500/50 px-4 py-3"
         />
       </div>
       <div className="space-y-1.5">
         <Label className="text-slate-400 text-xs">Token</Label>
         <Select value={token} onValueChange={setToken}>
-          <SelectTrigger className="bg-white/[0.04] border-white/10 text-slate-300">
+          <SelectTrigger className="bg-white/[0.04] border-white/10 text-slate-300 px-4 py-6">
             <SelectValue />
           </SelectTrigger>
-          <SelectContent className="bg-[#1e293b] border-white/10 text-slate-300">
+          <SelectContent className="bg-glass border-white/[0.08] text-slate-300 [&_[role=option]]:px-4 [&_[role=option]]:py-3">
             <SelectItem value="HSK">HSK (native)</SelectItem>
             <SelectItem value="USDC">USDC (HashKey)</SelectItem>
             <SelectItem value="USDT">USDT (HashKey)</SelectItem>
