@@ -55,7 +55,7 @@ const steps = [
               className="flex items-center justify-between py-2.5 border-b border-white/8 last:border-0"
             >
               <span className="text-white/50 text-sm">{check.label}</span>
-              <span className="flex items-center gap-1.5 text-emerald-400 text-xs font-medium">
+              <span className="flex items-center gap-1.5 text-sky-400 text-xs font-medium">
                 <CheckCircle className="w-3.5 h-3.5" />
                 {check.status}
               </span>
@@ -77,9 +77,9 @@ const steps = [
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ type: "spring", stiffness: 200, damping: 15 }}
-            className="w-16 h-16 rounded-full bg-emerald-500/20 flex items-center justify-center"
+            className="w-16 h-16 rounded-full bg-sky-500/20 flex items-center justify-center"
           >
-            <CheckCircle className="w-8 h-8 text-emerald-400" />
+            <CheckCircle className="w-8 h-8 text-sky-400" />
           </motion.div>
           <div className="text-center">
             <p className="text-white font-medium mb-1">Payment Settled</p>
@@ -112,7 +112,7 @@ const steps = [
           </div>
           <div className="flex items-center justify-between py-2.5 border-b border-white/8">
             <span className="text-white/50 text-sm">ProofLink ID</span>
-            <span className="text-emerald-400 text-xs font-mono">PL-20260113</span>
+            <span className="text-sky-400 text-xs font-mono">PL-20260113</span>
           </div>
           <div className="flex items-center justify-between py-2.5">
             <span className="text-white/50 text-sm">Audit Trail</span>
@@ -166,7 +166,7 @@ export function DemoSection() {
           transition={{ duration: 0.7, ease: "easeOut" }}
           className="text-center mb-16"
         >
-          <p className="text-xs font-mono text-emerald-400/70 tracking-[0.2em] uppercase mb-5">
+          <p className="text-xs font-mono text-sky-400/70 tracking-[0.2em] uppercase mb-5">
             / End-to-End Compliance Flow
           </p>
           <h2 className="text-4xl md:text-5xl font-light text-white tracking-tight">
@@ -196,7 +196,7 @@ export function DemoSection() {
                 }`}
               >
                 {i < activeStep && (
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-sky-400 shrink-0" />
                 )}
                 <span className="hidden sm:inline">{s.label}</span>
                 <span className="sm:hidden">{i + 1}</span>
@@ -207,7 +207,7 @@ export function DemoSection() {
           {/* Progress bar */}
           <div className="h-0.5 bg-white/8 rounded-full mb-8 overflow-hidden">
             <motion.div
-              className="h-full bg-emerald-400 rounded-full"
+              className="h-full bg-sky-400 rounded-full"
               animate={{ width: `${((activeStep + 1) / steps.length) * 100}%` }}
               transition={{ duration: 0.5, ease: "easeInOut" }}
             />
@@ -224,8 +224,8 @@ export function DemoSection() {
                 transition={{ duration: 0.35, ease: "easeOut" }}
               >
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="w-9 h-9 rounded-xl bg-emerald-500/15 flex items-center justify-center">
-                    <step.icon className="w-4 h-4 text-emerald-400" />
+                  <div className="w-9 h-9 rounded-xl bg-sky-500/15 flex items-center justify-center">
+                    <step.icon className="w-4 h-4 text-sky-400" />
                   </div>
                   <h3 className="text-white font-medium">{step.content.title}</h3>
                 </div>
@@ -255,7 +255,7 @@ export function DemoSection() {
                     setActiveStep(i)
                   }}
                   className={`h-1.5 rounded-full transition-all duration-300 ${
-                    i === activeStep ? "bg-emerald-400 w-4" : "bg-white/20 w-1.5"
+                    i === activeStep ? "bg-sky-400 w-4" : "bg-white/20 w-1.5"
                   }`}
                 />
               ))}
