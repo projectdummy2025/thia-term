@@ -71,8 +71,8 @@ function PanelHeader({ title, icon: Icon, onBack }: { title: string; icon: React
       >
         <ArrowLeft className="w-4 h-4" />
       </button>
-      <div className="w-9 h-9 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
-        <Icon className="w-5 h-5 text-emerald-400" />
+      <div className="w-9 h-9 rounded-xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center">
+        <Icon className="w-5 h-5 text-sky-400" />
       </div>
       <h2 className="text-lg font-bold text-white">{title}</h2>
     </div>
@@ -234,11 +234,11 @@ function PersonalDetailsPanel({ onBack }: { onBack: () => void }) {
         <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Profile Picture</h3>
         <div className="flex items-center gap-4">
           <div className="relative group">
-            <div className="w-16 h-16 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center overflow-hidden">
+            <div className="w-16 h-16 rounded-2xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center overflow-hidden">
               {avatarUrl ? (
                 <img src={avatarUrl} alt="avatar" className="w-full h-full object-cover" />
               ) : (
-                <span className="text-emerald-400 font-bold text-xl">{initials}</span>
+                <span className="text-sky-400 font-bold text-xl">{initials}</span>
               )}
             </div>
             <button
@@ -268,7 +268,7 @@ function PersonalDetailsPanel({ onBack }: { onBack: () => void }) {
           />
         </div>
         {avatarMsg && (
-          <p className={`text-xs flex items-center gap-1 ${avatarMsg.type === "ok" ? "text-emerald-400" : "text-red-400"}`}>
+          <p className={`text-xs flex items-center gap-1 ${avatarMsg.type === "ok" ? "text-sky-400" : "text-red-400"}`}>
             {avatarMsg.type === "ok" && <Check className="h-3 w-3" />}
             {avatarMsg.text}
           </p>
@@ -286,7 +286,7 @@ function PersonalDetailsPanel({ onBack }: { onBack: () => void }) {
             value={name}
             onChange={e => setName(e.target.value)}
             placeholder="Your name"
-            className="mt-1.5 bg-white/[0.04] border-white/10 text-white placeholder:text-slate-600 focus:border-emerald-500/50 rounded-xl"
+            className="mt-1.5 bg-white/[0.04] border-white/10 text-white placeholder:text-slate-600 focus:border-sky-500/50 rounded-xl"
           />
         </div>
 
@@ -311,7 +311,7 @@ function PersonalDetailsPanel({ onBack }: { onBack: () => void }) {
         )}
 
         {msg && (
-          <p className={`text-sm flex items-center gap-1.5 ${msg.type === "ok" ? "text-emerald-400" : "text-red-400"}`}>
+          <p className={`text-sm flex items-center gap-1.5 ${msg.type === "ok" ? "text-sky-400" : "text-red-400"}`}>
             {msg.type === "ok" && <Check className="h-4 w-4" />}
             {msg.text}
           </p>
@@ -320,7 +320,7 @@ function PersonalDetailsPanel({ onBack }: { onBack: () => void }) {
         <button
           onClick={save}
           disabled={!isDirty || saving}
-          className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white rounded-xl text-sm font-medium transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+          className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-sky-600 to-sky-500 hover:from-sky-500 hover:to-sky-400 text-white rounded-xl text-sm font-medium transition-all disabled:opacity-40 disabled:cursor-not-allowed"
         >
           {saving ? <><Loader2 className="h-4 w-4 animate-spin" />Saving…</> : "Save Changes"}
         </button>
@@ -334,14 +334,14 @@ function PersonalDetailsPanel({ onBack }: { onBack: () => void }) {
         {walletAddress ? (
           <div className="rounded-2xl border border-white/[0.06] bg-white/[0.03] p-4 space-y-3">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center shrink-0">
-                <Wallet className="h-4 w-4 text-emerald-400" />
+              <div className="w-8 h-8 rounded-xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center shrink-0">
+                <Wallet className="h-4 w-4 text-sky-400" />
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 mb-0.5">
                   <p className="text-xs text-slate-400 font-medium">Connected wallet</p>
                   {walletType === "managed" ? (
-                    <span className="text-[10px] font-medium px-1.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Thia-Term managed</span>
+                    <span className="text-[10px] font-medium px-1.5 py-0.5 rounded-full bg-sky-500/10 text-sky-400 border border-sky-500/20">Thia-Term managed</span>
                   ) : walletType === "external" ? (
                     <span className="text-[10px] font-medium px-1.5 py-0.5 rounded-full bg-white/[0.04] text-slate-400 border border-white/10">External</span>
                   ) : null}
@@ -358,7 +358,7 @@ function PersonalDetailsPanel({ onBack }: { onBack: () => void }) {
             <div className="flex gap-2">
               <button
                 onClick={copyWallet}
-                className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-1.5 text-xs bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 hover:bg-emerald-500/20 rounded-xl transition-colors"
+                className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-1.5 text-xs bg-sky-500/10 border border-sky-500/20 text-sky-400 hover:bg-sky-500/20 rounded-xl transition-colors"
               >
                 {walletCopied ? <><Check className="h-3 w-3" />Copied</> : <><Copy className="h-3 w-3" />Copy</>}
               </button>
@@ -398,9 +398,9 @@ function PersonalDetailsPanel({ onBack }: { onBack: () => void }) {
                     <div className="flex gap-1">
                       <button
                         onClick={copySeed}
-                        className="p-1 rounded-lg text-slate-500 hover:text-emerald-400 transition-colors"
+                        className="p-1 rounded-lg text-slate-500 hover:text-sky-400 transition-colors"
                       >
-                        {seedCopied ? <Check className="h-3.5 w-3.5 text-emerald-400" /> : <Copy className="h-3.5 w-3.5" />}
+                        {seedCopied ? <Check className="h-3.5 w-3.5 text-sky-400" /> : <Copy className="h-3.5 w-3.5" />}
                       </button>
                       <button
                         onClick={() => setSeedVisible(!seedVisible)}
@@ -452,8 +452,8 @@ function PersonalDetailsPanel({ onBack }: { onBack: () => void }) {
           </div>
         ) : (
           <div className="rounded-2xl border border-dashed border-white/[0.08] bg-white/[0.02] p-6 flex flex-col items-center gap-3 text-center">
-            <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
-              <Wallet className="h-5 w-5 text-emerald-400" />
+            <div className="w-10 h-10 rounded-xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center">
+              <Wallet className="h-5 w-5 text-sky-400" />
             </div>
             <div>
               <p className="text-sm font-medium text-slate-200">No wallet linked</p>
@@ -461,14 +461,14 @@ function PersonalDetailsPanel({ onBack }: { onBack: () => void }) {
             </div>
             <button
               onClick={() => setWalletModalOpen(true)}
-              className="inline-flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white rounded-xl text-sm font-medium transition-all"
+              className="inline-flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-sky-600 to-sky-500 hover:from-sky-500 hover:to-sky-400 text-white rounded-xl text-sm font-medium transition-all"
             >
               <Plus className="h-3.5 w-3.5" />Link wallet
             </button>
           </div>
         )}
         {walletMsg && (
-          <p className={`text-xs flex items-center gap-1 ${walletMsg.type === "ok" ? "text-emerald-400" : "text-red-400"}`}>
+          <p className={`text-xs flex items-center gap-1 ${walletMsg.type === "ok" ? "text-sky-400" : "text-red-400"}`}>
             {walletMsg.type === "ok" && <Check className="h-3 w-3" />}
             {walletMsg.text}
           </p>
@@ -547,7 +547,7 @@ function AuthenticationPanel({ onBack }: { onBack: () => void }) {
               value={form.current}
               onChange={e => setForm({ ...form, current: e.target.value })}
               placeholder="Enter current password (if set)"
-              className="pr-10 bg-white/[0.04] border-white/10 text-white placeholder:text-slate-600 focus:border-emerald-500/50 rounded-xl"
+              className="pr-10 bg-white/[0.04] border-white/10 text-white placeholder:text-slate-600 focus:border-sky-500/50 rounded-xl"
             />
             <button
               type="button"
@@ -568,7 +568,7 @@ function AuthenticationPanel({ onBack }: { onBack: () => void }) {
               value={form.newPw}
               onChange={e => setForm({ ...form, newPw: e.target.value })}
               placeholder="At least 8 characters"
-              className="pr-10 bg-white/[0.04] border-white/10 text-white placeholder:text-slate-600 focus:border-emerald-500/50 rounded-xl"
+              className="pr-10 bg-white/[0.04] border-white/10 text-white placeholder:text-slate-600 focus:border-sky-500/50 rounded-xl"
             />
             <button
               type="button"
@@ -584,7 +584,7 @@ function AuthenticationPanel({ onBack }: { onBack: () => void }) {
                 className={`h-full rounded-full transition-all ${
                   form.newPw.length < 8 ? "w-1/4 bg-red-500" :
                   form.newPw.length < 12 ? "w-1/2 bg-amber-500" :
-                  "w-full bg-emerald-500"
+                  "w-full bg-sky-500"
                 }`}
               />
             </div>
@@ -599,7 +599,7 @@ function AuthenticationPanel({ onBack }: { onBack: () => void }) {
               value={form.confirm}
               onChange={e => setForm({ ...form, confirm: e.target.value })}
               placeholder="Repeat new password"
-              className={`pr-10 bg-white/[0.04] border-white/10 text-white placeholder:text-slate-600 focus:border-emerald-500/50 rounded-xl ${form.confirm && form.confirm !== form.newPw ? "border-red-500/50" : ""}`}
+              className={`pr-10 bg-white/[0.04] border-white/10 text-white placeholder:text-slate-600 focus:border-sky-500/50 rounded-xl ${form.confirm && form.confirm !== form.newPw ? "border-red-500/50" : ""}`}
             />
             <button
               type="button"
@@ -615,7 +615,7 @@ function AuthenticationPanel({ onBack }: { onBack: () => void }) {
         </div>
 
         {msg && (
-          <p className={`text-sm flex items-center gap-1.5 ${msg.type === "ok" ? "text-emerald-400" : "text-red-400"}`}>
+          <p className={`text-sm flex items-center gap-1.5 ${msg.type === "ok" ? "text-sky-400" : "text-red-400"}`}>
             {msg.type === "ok" && <Check className="h-4 w-4" />}
             {msg.text}
           </p>
@@ -624,7 +624,7 @@ function AuthenticationPanel({ onBack }: { onBack: () => void }) {
         <button
           onClick={save}
           disabled={!form.newPw || !form.confirm || saving}
-          className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white rounded-xl text-sm font-medium transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+          className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-sky-600 to-sky-500 hover:from-sky-500 hover:to-sky-400 text-white rounded-xl text-sm font-medium transition-all disabled:opacity-40 disabled:cursor-not-allowed"
         >
           {saving ? <><Loader2 className="h-4 w-4 animate-spin" />Saving…</> : "Update Password"}
         </button>
@@ -674,7 +674,7 @@ function NotificationsPanel({ onBack }: { onBack: () => void }) {
       </div>
       <button
         onClick={save}
-        className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white rounded-xl text-sm font-medium transition-all"
+        className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-sky-600 to-sky-500 hover:from-sky-500 hover:to-sky-400 text-white rounded-xl text-sm font-medium transition-all"
       >
         {saved ? <><Check className="h-4 w-4" />Saved</> : "Save Preferences"}
       </button>
@@ -689,8 +689,8 @@ function ComingSoonPanel({ title, icon: Icon, onBack }: { title: string; icon: R
     <div className="space-y-6">
       <PanelHeader title={title} icon={Icon} onBack={onBack} />
       <div className="flex flex-col items-center justify-center py-16 text-center">
-        <div className="w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mb-4">
-          <Icon className="w-7 h-7 text-emerald-400" />
+        <div className="w-14 h-14 rounded-2xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center mb-4">
+          <Icon className="w-7 h-7 text-sky-400" />
         </div>
         <p className="text-white font-semibold">Coming soon</p>
         <p className="text-sm text-slate-500 mt-1 max-w-xs">This section is under development. Check back in a future update.</p>
@@ -745,7 +745,7 @@ function ExportsPanel({ onBack }: { onBack: () => void }) {
               size="sm"
               disabled={loading === r.type}
               onClick={() => download(r.type, r.filename, r.isHtml)}
-              className="shrink-0 bg-white/[0.06] border border-white/10 text-slate-300 hover:bg-emerald-500/10 hover:border-emerald-500/30 hover:text-emerald-400 rounded-xl gap-2 transition-colors"
+              className="shrink-0 bg-white/[0.06] border border-white/10 text-slate-300 hover:bg-sky-500/10 hover:border-sky-500/30 hover:text-sky-400 rounded-xl gap-2 transition-colors"
             >
               {loading === r.type
                 ? <Loader2 className="h-3.5 w-3.5 animate-spin" />
@@ -807,7 +807,7 @@ export function SettingsModule() {
           value={search}
           onChange={e => setSearch(e.target.value)}
           placeholder="Search settings…"
-          className="w-full pl-11 pr-4 py-3 bg-white/[0.04] border border-white/10 rounded-xl text-white placeholder:text-slate-600 text-sm focus:outline-none focus:border-emerald-500/50 transition-colors"
+          className="w-full pl-11 pr-4 py-3 bg-white/[0.04] border border-white/10 rounded-xl text-white placeholder:text-slate-600 text-sm focus:outline-none focus:border-sky-500/50 transition-colors"
         />
       </div>
 
@@ -823,8 +823,8 @@ export function SettingsModule() {
                   onClick={() => setActivePanel(item.id)}
                   className="flex items-start gap-4 rounded-2xl border border-white/[0.06] bg-white/[0.03] hover:bg-white/[0.05] p-5 cursor-pointer transition-all text-left group"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center shrink-0 group-hover:bg-emerald-500/15 transition-colors">
-                    <item.icon className="w-5 h-5 text-emerald-400" />
+                  <div className="w-10 h-10 rounded-xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center shrink-0 group-hover:bg-sky-500/15 transition-colors">
+                    <item.icon className="w-5 h-5 text-sky-400" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between gap-2">
