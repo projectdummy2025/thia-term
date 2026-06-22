@@ -72,7 +72,7 @@ export function WalletOnboardingModal({ open, onClose }: WalletOnboardingModalPr
       <DialogContent className="max-w-md bg-[#0a1220]/95 backdrop-blur-xl border border-white/[0.08] text-white shadow-2xl shadow-black/60">
         <DialogHeader>
           <DialogTitle className="text-white font-semibold tracking-tight flex items-center gap-2">
-            <Wallet className="h-4 w-4 text-emerald-400" />
+            <Wallet className="h-4 w-4 text-sky-400" />
             Set Up Your Wallet
           </DialogTitle>
           <DialogDescription className="text-slate-400">
@@ -88,15 +88,15 @@ export function WalletOnboardingModal({ open, onClose }: WalletOnboardingModalPr
               className="w-full text-left p-4 rounded-xl bg-white/[0.04] border border-white/[0.08] hover:bg-white/[0.08] transition-colors"
             >
               <div className="flex items-center gap-3">
-                <div className="p-2 rounded-lg bg-emerald-500/10">
-                  <Wallet className="h-5 w-5 text-emerald-400" />
+                <div className="p-2 rounded-lg bg-sky-500/10">
+                  <Wallet className="h-5 w-5 text-sky-400" />
                 </div>
                 <div className="flex-1">
                   <p className="text-sm font-medium text-white">Create New Wallet</p>
                   <p className="text-xs text-slate-500 mt-0.5">Generate a new wallet managed by T3N</p>
                 </div>
                 {creating ? (
-                  <Loader2 className="h-5 w-5 text-emerald-400 animate-spin" />
+                  <Loader2 className="h-5 w-5 text-sky-400 animate-spin" />
                 ) : (
                   <ArrowRight className="h-5 w-5 text-slate-500" />
                 )}
@@ -139,7 +139,7 @@ export function WalletOnboardingModal({ open, onClose }: WalletOnboardingModalPr
               </div>
             )}
 
-            <Button onClick={() => { onClose(); window.location.reload() }} className="w-full bg-emerald-600 hover:bg-emerald-500 text-white">
+            <Button onClick={() => { onClose(); window.location.reload() }} className="w-full bg-sky-600 hover:bg-sky-500 text-white">
               Done — Open Dashboard
             </Button>
           </div>
