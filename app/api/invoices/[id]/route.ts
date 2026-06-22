@@ -6,13 +6,14 @@ import { authOptions } from "@/lib/auth-config"
 import { prisma } from "@/lib/prisma"
 
 interface Params {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }
 
 // Public GET — no auth required, used by the payment page
 export async function GET(_req: NextRequest, { params }: Params) {
+  const { id } = await params
   const invoice = await prisma.invoice.findUnique({
-    where: { id: params.id },
+    where: { id },
     include: {
       user: { select: { name: true, email: true, walletAddress: true } },
     },
@@ -27,6 +28,7 @@ export async function GET(_req: NextRequest, { params }: Params) {
 
 // Authed PATCH — update status, txHash, etc.
 export async function PATCH(request: NextRequest, { params }: Params) {
+  const { id } = await params
   const session = await getServerSession(authOptions)
   const userId = session?.user?.id
 
@@ -40,7 +42,7 @@ export async function PATCH(request: NextRequest, { params }: Params) {
     body.txHash &&
     Object.keys(body).every((k) => allowedUnauthFields.includes(k))
 
-  const invoice = await prisma.invoice.findUnique({ where: { id: params.id } })
+  const invoice = await prisma.invoice.findUnique({ where: { id } })
   if (!invoice) {
     return NextResponse.json({ success: false, error: "Invoice not found" }, { status: 404 })
   }
@@ -61,6 +63,6 @@ export async function PATCH(request: NextRequest, { params }: Params) {
   if (body.dueAt) data.dueAt = new Date(body.dueAt)
   if (body.notes !== undefined) data.notes = body.notes
 
-  const updated = await prisma.invoice.update({ where: { id: params.id }, data })
+  const updated = await prisma.invoice.update({ where: { id }, data })
   return NextResponse.json({ success: true, data: updated })
 }
