@@ -65,7 +65,7 @@ export function FeaturesSection() {
       <div className="sticky top-0 h-screen flex flex-col justify-center px-8 md:px-16 lg:px-24 overflow-hidden">
         <div className="max-w-5xl w-full mx-auto">
           <motion.div style={{ y: headerY, opacity: headerOp }} className="mb-12">
-            <p className="text-xs font-mono text-emerald-400/70 tracking-[0.2em] uppercase mb-5">
+            <p className="text-xs font-mono text-sky-400/70 tracking-[0.2em] uppercase mb-5">
               / ProofLink Engine Capabilities
             </p>
             <h2 className="text-5xl md:text-6xl font-light text-white tracking-tight">
@@ -80,11 +80,11 @@ export function FeaturesSection() {
                 style={itemStyles[i]}
                 className="group relative"
               >
-                <div className="flex items-start gap-6 p-8 rounded-2xl border border-white/8 hover:border-emerald-500/30 bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-500">
+                <div className="flex items-start gap-6 p-8 rounded-2xl border border-white/8 hover:border-sky-500/30 bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-500">
                   <div className="shrink-0">
                     <span className="text-xs font-mono text-white/20 block mb-4">{feature.num}</span>
-                    <div className="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center group-hover:bg-emerald-500/20 transition-colors duration-300">
-                      <feature.icon className="w-5 h-5 text-emerald-400" />
+                    <div className="w-12 h-12 rounded-xl bg-sky-500/10 flex items-center justify-center group-hover:bg-sky-500/20 transition-colors duration-300">
+                      <feature.icon className="w-5 h-5 text-sky-400" />
                     </div>
                   </div>
                   <div>
