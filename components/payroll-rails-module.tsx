@@ -320,9 +320,9 @@ function PayrollBatchCard({ batch, onSelect }: { batch: PayrollBatch; onSelect: 
   const getStatusColor = (status: string) => {
     switch (status) {
       case "completed":
-        return "bg-emerald-500/10 text-emerald-400 border-emerald-500/20"
+        return "bg-sky-500/10 text-sky-400 border-sky-500/20"
       case "processing":
-        return "bg-emerald-500/10 text-emerald-400 border-emerald-500/20"
+        return "bg-sky-500/10 text-sky-400 border-sky-500/20"
       case "draft":
         return "bg-white/[0.06] text-slate-400 border-white/[0.08]"
       case "failed":
@@ -337,7 +337,7 @@ function PayrollBatchCard({ batch, onSelect }: { batch: PayrollBatch; onSelect: 
       case "completed":
         return <CheckCircle className="h-4 w-4 text-green-500" />
       case "processing":
-        return <Clock className="h-4 w-4 text-emerald-500" />
+        return <Clock className="h-4 w-4 text-sky-500" />
       case "failed":
         return <AlertTriangle className="h-4 w-4 text-red-500" />
       default:
@@ -557,9 +557,9 @@ function RecipientsManagement({ recipients }: { recipients: Recipient[] }) {
   const getKycLevelColor = (level: string) => {
     switch (level) {
       case "institutional":
-        return "bg-emerald-500/10 text-emerald-400 border-emerald-500/20"
+        return "bg-sky-500/10 text-sky-400 border-sky-500/20"
       case "enhanced":
-        return "bg-emerald-500/10 text-emerald-400 border-emerald-500/20"
+        return "bg-sky-500/10 text-sky-400 border-sky-500/20"
       case "basic":
         return "bg-amber-500/10 text-amber-400 border-amber-500/20"
       default:
@@ -570,13 +570,13 @@ function RecipientsManagement({ recipients }: { recipients: Recipient[] }) {
   const getStatusColor = (status: string) => {
     switch (status) {
       case "verified":
-        return "bg-emerald-500/10 text-emerald-400 border-emerald-500/20"
+        return "bg-sky-500/10 text-sky-400 border-sky-500/20"
       case "pending":
         return "bg-amber-500/10 text-amber-400 border-amber-500/20"
       case "blocked":
         return "bg-red-500/10 text-red-400 border-red-500/20"
       case "paid":
-        return "bg-emerald-500/10 text-emerald-400 border-emerald-500/20"
+        return "bg-sky-500/10 text-sky-400 border-sky-500/20"
       default:
         return "bg-white/[0.06] text-slate-400 border-white/[0.08]"
     }
@@ -783,21 +783,21 @@ function PayrollBatchDetails({ batch, recipients }: { batch: PayrollBatch; recip
                     <CheckCircle className="h-4 w-4 text-green-500" />
                     <span className="text-sm">KYC Verification</span>
                   </div>
-                  <Badge className="bg-emerald-500/10 text-emerald-400 border-emerald-500/20">Passed</Badge>
+                  <Badge className="bg-sky-500/10 text-sky-400 border-sky-500/20">Passed</Badge>
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <CheckCircle className="h-4 w-4 text-green-500" />
                     <span className="text-sm">Sanctions Screening</span>
                   </div>
-                  <Badge className="bg-emerald-500/10 text-emerald-400 border-emerald-500/20">Passed</Badge>
+                  <Badge className="bg-sky-500/10 text-sky-400 border-sky-500/20">Passed</Badge>
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <CheckCircle className="h-4 w-4 text-green-500" />
                     <span className="text-sm">Country Limits</span>
                   </div>
-                  <Badge className="bg-emerald-500/10 text-emerald-400 border-emerald-500/20">Within Limits</Badge>
+                  <Badge className="bg-sky-500/10 text-sky-400 border-sky-500/20">Within Limits</Badge>
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
