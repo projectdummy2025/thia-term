@@ -50,7 +50,7 @@ export function AgentPaymentWidget({ agents }: AgentPaymentWidgetProps) {
     <div className="bg-white/[0.03] border border-white/[0.08] rounded-2xl p-6">
       <div className="mb-6">
         <h3 className="font-semibold text-white">Agent Payments</h3>
-        <p className="text-sm text-slate-500">Autonomous on-chain settlements on HashKey</p>
+        <p className="text-sm text-slate-500">Autonomous settlements via T3N</p>
       </div>
 
       <div className="space-y-4">
@@ -158,7 +158,7 @@ export function AgentPaymentWidget({ agents }: AgentPaymentWidgetProps) {
           className="w-full bg-gradient-to-r from-sky-600 to-sky-500 hover:from-sky-500 hover:to-sky-400 text-white py-2.5 rounded-xl text-sm font-semibold disabled:opacity-50 flex items-center justify-center gap-2 shadow-lg shadow-sky-900/30"
         >
           {loading ? (
-            'Sending on HashKey...'
+            'Sending via T3N...'
           ) : (
             <>
               <Bot className="w-4 h-4" /> Execute Payment
@@ -170,7 +170,7 @@ export function AgentPaymentWidget({ agents }: AgentPaymentWidgetProps) {
           <div className="bg-sky-500/10 border border-sky-500/20 rounded-xl p-3 flex items-start gap-2">
             <CheckCircle className="w-4 h-4 text-sky-400 mt-0.5 shrink-0" />
             <div>
-              <p className="text-sm font-medium text-sky-400">Payment sent on HashKey Chain</p>
+              <p className="text-sm font-medium text-sky-400">Payment sent via T3N</p>
               <a
                 href={result.txUrl}
                 target="_blank"
