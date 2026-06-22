@@ -42,7 +42,7 @@ export function AboutSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
-              className="text-xs font-mono text-emerald-400/70 tracking-[0.2em] uppercase mb-6"
+              className="text-xs font-mono text-sky-400/70 tracking-[0.2em] uppercase mb-6"
             >
               / About Thia-Term
             </motion.p>
@@ -54,7 +54,7 @@ export function AboutSection() {
             >
               Payment infrastructure for
               <br />
-              <span className="text-emerald-300">the agent economy</span>
+              <span className="text-sky-300">the agent economy</span>
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
