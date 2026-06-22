@@ -50,7 +50,7 @@ function SkeletonRow() {
 }
 
 const statusStyles: Record<string, string> = {
-  completed: "badge-emerald",
+  completed: "badge-sky",
   pending: "badge-amber",
   failed: "badge-red",
 }
@@ -212,13 +212,13 @@ export function DashboardOverview() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.1 }}
-          className="rounded-2xl border border-emerald-500/20 bg-emerald-500/[0.04] p-6"
+          className="rounded-2xl border border-sky-500/20 bg-sky-500/[0.04] p-6"
         >
           <div className="flex items-center justify-between mb-5">
             <div>
               <h2 className="text-base font-semibold text-white">Get started with Thia-Term</h2>
               <p className="text-sm text-slate-500 mt-0.5">
-                <span className="text-emerald-400 font-medium">{completedSteps}</span> of 3 steps complete
+                <span className="text-sky-400 font-medium">{completedSteps}</span> of 3 steps complete
               </p>
             </div>
             <button
@@ -235,11 +235,11 @@ export function DashboardOverview() {
                 className={cn(
                   "rounded-xl border p-4 transition-all",
                   done
-                    ? "border-emerald-500/20 bg-emerald-500/[0.06]"
+                    ? "border-sky-500/20 bg-sky-500/[0.06]"
                     : "border-white/[0.06] bg-white/[0.02]"
                 )}
               >
-                <h3 className={cn("font-semibold text-sm mb-1", done ? "text-emerald-300" : "text-slate-300")}>{title}</h3>
+                <h3 className={cn("font-semibold text-sm mb-1", done ? "text-sky-300" : "text-slate-300")}>{title}</h3>
                 <p className="text-xs text-slate-600">{desc}</p>
               </div>
             ))}
@@ -260,16 +260,16 @@ export function DashboardOverview() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:col-span-2 relative overflow-hidden rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-500/[0.08] to-emerald-500/[0.02] p-6"
+            className="lg:col-span-2 relative overflow-hidden rounded-2xl border border-sky-500/20 bg-gradient-to-br from-sky-500/[0.08] to-sky-500/[0.02] p-6"
           >
             <div className="relative z-10">
-              <p className="text-xs text-emerald-400/70 font-medium">Total Volume</p>
+              <p className="text-xs text-sky-400/70 font-medium">Total Volume</p>
               <p className="text-4xl font-bold text-white mt-2 tracking-tight">
                 ${s.totalVolume.toLocaleString()}
               </p>
-              <p className="text-xs text-emerald-400/60 mt-2">{s.totalPayments} payments processed</p>
+              <p className="text-xs text-sky-400/60 mt-2">{s.totalPayments} payments processed</p>
             </div>
-            <div className="absolute -bottom-6 -right-6 w-32 h-32 rounded-full bg-emerald-500/5 blur-2xl" aria-hidden="true" />
+            <div className="absolute -bottom-6 -right-6 w-32 h-32 rounded-full bg-sky-500/5 blur-2xl" aria-hidden="true" />
           </motion.div>
         )}
 
@@ -340,7 +340,7 @@ export function DashboardOverview() {
                   <div className="flex items-center gap-3">
                     <div className={cn(
                       "w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold shrink-0",
-                      p.status === 'completed' ? "bg-emerald-500/10 text-emerald-400" :
+                      p.status === 'completed' ? "bg-sky-500/10 text-sky-400" :
                       p.status === 'pending' ? "bg-amber-500/10 text-amber-400" :
                       "bg-white/[0.06] text-slate-500"
                     )}>
@@ -383,8 +383,8 @@ export function DashboardOverview() {
             </div>
           ) : compliance ? (
             <div className="space-y-4">
-              <div className="flex items-center gap-4 p-4 bg-emerald-500/[0.06] rounded-xl border border-emerald-500/20">
-                <div className="text-4xl font-black text-emerald-400">{compliance.score}</div>
+              <div className="flex items-center gap-4 p-4 bg-sky-500/[0.06] rounded-xl border border-sky-500/20">
+                <div className="text-4xl font-black text-sky-400">{compliance.score}</div>
                 <div>
                   <p className="font-semibold text-white text-sm">Compliance Score</p>
                   <p className="text-xs text-slate-500">Based on {s.totalPayments} payments</p>
@@ -403,8 +403,8 @@ export function DashboardOverview() {
                   <Progress value={item.value} className="h-1.5 bg-white/10" />
                 </div>
               ))}
-              <p className="text-xs text-emerald-400 flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block" />
+              <p className="text-xs text-sky-400 flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-sky-500 inline-block" />
                 No alerts · All systems normal
               </p>
             </div>
