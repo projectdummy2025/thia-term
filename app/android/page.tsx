@@ -119,7 +119,7 @@ export default function AndroidComingSoon() {
 
       {/* Footer */}
       <div className="relative z-10 text-center py-6 border-t border-white/5 text-xs text-slate-600">
-        © {new Date().getFullYear()} Thia-Term · Built on HashKey Chain
+        © {new Date().getFullYear()} Thia-Term · Powered by T3N
       </div>
     </div>
   )
