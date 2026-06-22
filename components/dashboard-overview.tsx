@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
 import { Shield, Wallet, TrendingUp } from "lucide-react"
 import { AgentPaymentWidget } from "@/components/agent-payment-widget"
+import { VendorVerifyWidget } from "@/components/vendor-verify-widget"
 import { useSession } from "next-auth/react"
 import { cn } from "@/lib/utils"
 
@@ -424,6 +425,33 @@ export function DashboardOverview() {
         transition={{ duration: 0.4, delay: 0.55, ease: [0.22, 1, 0.36, 1] }}
       >
         <AgentPaymentWidget agents={agents} />
+      </motion.div>
+
+      {/* ── Vendor Verification ── */}
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4, delay: 0.65, ease: [0.22, 1, 0.36, 1] }}
+        className="grid grid-cols-1 lg:grid-cols-2 gap-6"
+      >
+        <VendorVerifyWidget
+          onViewDetails={() => {
+            if (typeof window !== 'undefined') {
+              window.location.href = '/dashboard?tab=vendor-verify'
+            }
+          }}
+        />
+
+        {/* Placeholder for future feature */}
+        <div className="card-surface p-6 flex items-center justify-center">
+          <div className="text-center">
+            <div className="w-12 h-12 mx-auto mb-3 rounded-xl bg-white/[0.04] flex items-center justify-center">
+              <TrendingUp className="w-6 h-6 text-slate-600" />
+            </div>
+            <p className="text-sm font-medium text-slate-400">More features coming soon</p>
+            <p className="text-xs text-slate-600 mt-1">Stay tuned for updates</p>
+          </div>
+        </div>
       </motion.div>
     </div>
   )

@@ -58,34 +58,35 @@ export function ComplianceVaultsModule() {
   const [selectedVault, setSelectedVault] = useState<ComplianceVault | null>(null)
   const [showSimulator, setShowSimulator] = useState(false)
   const [vaults, setVaults] = useState<ComplianceVault[]>([])
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
 
-  const fetchVaults = async () => {
-    try {
-      const res = await fetch("/api/vaults")
-      const json = await res.json()
-      if (json.success) {
-        setVaults(
-          json.data.map((v: any) => ({
-            id: v.id,
-            name: v.name,
-            status: v.status as "active" | "paused" | "draft",
-            policies: Array.isArray(v.policies) ? v.policies.length : 0,
-            blocked: 0,
-            allowed: v.monthlyTransactions,
-            riskScore: v.riskScore,
-            created: v.createdAt.split("T")[0],
-          }))
-        )
-      }
-    } catch (e) {
-      console.error("Failed to fetch vaults", e)
-    } finally {
-      setLoading(false)
-    }
-  }
+  // Disabled - Coming Soon
+  // const fetchVaults = async () => {
+  //   try {
+  //     const res = await fetch("/api/vaults")
+  //     const json = await res.json()
+  //     if (json.success) {
+  //       setVaults(
+  //         json.data.map((v: any) => ({
+  //           id: v.id,
+  //           name: v.name,
+  //           status: v.status as "active" | "paused" | "draft",
+  //           policies: Array.isArray(v.policies) ? v.policies.length : 0,
+  //           blocked: 0,
+  //           allowed: v.monthlyTransactions,
+  //           riskScore: v.riskScore,
+  //           created: v.createdAt.split("T")[0],
+  //         }))
+  //       )
+  //     }
+  //   } catch (e) {
+  //     console.error("Failed to fetch vaults", e)
+  //   } finally {
+  //     setLoading(false)
+  //   }
+  // }
 
-  useEffect(() => { fetchVaults() }, [])
+  // useEffect(() => { fetchVaults() }, [])
 
   const policyRules: PolicyRule[] = [
     {
@@ -127,77 +128,144 @@ export function ComplianceVaultsModule() {
           <p className="text-muted-foreground mt-1">Smart-account factories with programmable compliance policies</p>
         </div>
         <div className="flex gap-3">
-          <Button variant="outline" onClick={() => setShowSimulator(true)} className="text-slate-200 border-white/[0.12] hover:bg-white/[0.06] hover:text-white bg-transparent">
+          <Button
+            variant="outline"
+            disabled
+            className="text-slate-500 border-white/[0.08] bg-transparent cursor-not-allowed opacity-50"
+          >
             <BarChart3 className="h-4 w-4 mr-2" />
             Policy Simulator
           </Button>
-          <Dialog open={showCreateDialog} onOpenChange={setShowCreateDialog}>
-            <DialogTrigger asChild>
-              <Button className="bg-primary hover:bg-primary/90">
-                <Plus className="h-4 w-4 mr-2" />
-                Create Vault
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="max-w-2xl">
-              <DialogHeader>
-                <DialogTitle>Create Compliance Vault</DialogTitle>
-                <DialogDescription>Set up a new smart-account factory with custom policies</DialogDescription>
-              </DialogHeader>
-              <CreateVaultForm onClose={() => setShowCreateDialog(false)} onSuccess={() => { fetchVaults(); setShowCreateDialog(false) }} />
-            </DialogContent>
-          </Dialog>
+          <Button
+            disabled
+            className="bg-sky-600/50 cursor-not-allowed opacity-50"
+          >
+            <Plus className="h-4 w-4 mr-2" />
+            Create Vault
+          </Button>
         </div>
       </div>
 
-      {/* Vaults Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {loading ? (
-          <div className="col-span-3 text-center py-12 text-muted-foreground">Loading vaults…</div>
-        ) : vaults.length === 0 ? (
-          <div className="col-span-3 text-center py-12 text-muted-foreground">No vaults yet. Create your first vault.</div>
-        ) : (
-          vaults.map((vault) => (
-            <VaultCard key={vault.id} vault={vault} onSelect={setSelectedVault} />
-          ))
-        )}
+      {/* Coming Soon Banner */}
+      <div className="rounded-2xl border-2 border-amber-500/20 bg-gradient-to-br from-amber-500/10 to-amber-600/5 p-6">
+        <div className="flex items-start gap-4">
+          <div className="w-12 h-12 rounded-xl bg-amber-500/20 flex items-center justify-center shrink-0">
+            <Shield className="w-6 h-6 text-amber-400" />
+          </div>
+          <div className="flex-1">
+            <h3 className="text-lg font-bold text-white mb-2">🚧 T3N Integration Coming Soon</h3>
+            <p className="text-sm text-slate-300 leading-relaxed mb-3">
+              Compliance Vaults akan diintegrasikan dengan <span className="font-semibold text-amber-400">T3N TEE (Intel TDX)</span> untuk policy execution yang fully confidential.
+            </p>
+            <div className="space-y-1.5 text-xs text-slate-400">
+              <p>✨ <span className="text-slate-300">Policy enforcement di TEE enclave</span></p>
+              <p>✨ <span className="text-slate-300">Cross-tenant compliance verification</span></p>
+              <p>✨ <span className="text-slate-300">Programmable rules dengan DID authentication</span></p>
+            </div>
+            <div className="mt-4 pt-4 border-t border-amber-500/20">
+              <p className="text-xs text-amber-400/80">
+                <strong>Note:</strong> Smart contract architecture diganti dengan pure T3N TEE execution untuk security & privacy maksimal.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
 
-      {/* Policy Rules Management */}
-      <Card className="bg-card border-border">
+      {/* Vaults Grid - Mockup */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Mockup Vault 1 */}
+        <div className="rounded-2xl border border-white/[0.08] bg-white/[0.03] p-6 opacity-50 cursor-not-allowed">
+          <div className="flex items-start justify-between mb-4">
+            <div className="w-10 h-10 rounded-xl bg-sky-500/10 flex items-center justify-center">
+              <Shield className="w-5 h-5 text-sky-400" />
+            </div>
+            <span className="text-xs px-2 py-1 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20">
+              Coming Soon
+            </span>
+          </div>
+          <h3 className="font-semibold text-white mb-1">Asia-Pacific Vault</h3>
+          <p className="text-xs text-slate-500 mb-4">Geofencing + sanctions screening</p>
+          <div className="space-y-2 text-xs">
+            <div className="flex justify-between">
+              <span className="text-slate-500">Policies</span>
+              <span className="text-slate-300 font-medium">4 rules</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-slate-500">Risk Score</span>
+              <span className="text-sky-400 font-bold">85/100</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Mockup Vault 2 */}
+        <div className="rounded-2xl border border-white/[0.08] bg-white/[0.03] p-6 opacity-50 cursor-not-allowed">
+          <div className="flex items-start justify-between mb-4">
+            <div className="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center">
+              <Shield className="w-5 h-5 text-emerald-400" />
+            </div>
+            <span className="text-xs px-2 py-1 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20">
+              Coming Soon
+            </span>
+          </div>
+          <h3 className="font-semibold text-white mb-1">High-Value Transactions</h3>
+          <p className="text-xs text-slate-500 mb-4">Transaction limits + velocity checks</p>
+          <div className="space-y-2 text-xs">
+            <div className="flex justify-between">
+              <span className="text-slate-500">Policies</span>
+              <span className="text-slate-300 font-medium">6 rules</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-slate-500">Risk Score</span>
+              <span className="text-emerald-400 font-bold">92/100</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Mockup Vault 3 */}
+        <div className="rounded-2xl border border-white/[0.08] bg-white/[0.03] p-6 opacity-50 cursor-not-allowed">
+          <div className="flex items-start justify-between mb-4">
+            <div className="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center">
+              <Shield className="w-5 h-5 text-purple-400" />
+            </div>
+            <span className="text-xs px-2 py-1 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20">
+              Coming Soon
+            </span>
+          </div>
+          <h3 className="font-semibold text-white mb-1">24/7 Operations</h3>
+          <p className="text-xs text-slate-500 mb-4">Time restrictions + KYC verification</p>
+          <div className="space-y-2 text-xs">
+            <div className="flex justify-between">
+              <span className="text-slate-500">Policies</span>
+              <span className="text-slate-300 font-medium">3 rules</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-slate-500">Risk Score</span>
+              <span className="text-purple-400 font-bold">78/100</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Policy Rules Management - Disabled */}
+      <Card className="bg-card border-border opacity-50">
         <CardHeader>
-          <CardTitle className="text-card-foreground">Policy Rules Library</CardTitle>
-          <CardDescription>Drag and drop rules to configure vault policies</CardDescription>
+          <div className="flex items-center justify-between">
+            <div>
+              <CardTitle className="text-card-foreground">Policy Rules Library</CardTitle>
+              <CardDescription>Drag and drop rules to configure vault policies</CardDescription>
+            </div>
+            <span className="text-xs px-3 py-1 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20">
+              T3N Integration Required
+            </span>
+          </div>
         </CardHeader>
         <CardContent>
-          <PolicyRulesManager rules={policyRules} />
+          <div className="text-center py-8">
+            <Settings className="w-12 h-12 mx-auto mb-3 text-slate-600" />
+            <p className="text-sm text-slate-400">Policy rules will be available after T3N TEE integration</p>
+          </div>
         </CardContent>
       </Card>
-
-      {/* Vault Details Dialog */}
-      {selectedVault && (
-        <Dialog open={!!selectedVault} onOpenChange={() => setSelectedVault(null)}>
-          <DialogContent className="max-w-4xl">
-            <DialogHeader>
-              <DialogTitle>{selectedVault.name}</DialogTitle>
-              <DialogDescription>Vault configuration and policy management</DialogDescription>
-            </DialogHeader>
-            <VaultDetails vault={selectedVault} />
-          </DialogContent>
-        </Dialog>
-      )}
-
-      {/* Policy Simulator Dialog */}
-      {showSimulator && (
-        <Dialog open={showSimulator} onOpenChange={setShowSimulator}>
-          <DialogContent className="max-w-5xl">
-            <DialogHeader>
-              <DialogTitle>Policy Simulator</DialogTitle>
-              <DialogDescription>Test policy configurations against historical transaction data</DialogDescription>
-            </DialogHeader>
-            <PolicySimulator />
-          </DialogContent>
-        </Dialog>
-      )}
     </div>
   )
 }

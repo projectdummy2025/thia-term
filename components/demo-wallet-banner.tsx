@@ -15,7 +15,6 @@ export function DemoWalletBanner() {
   const [dismissed, setDismissed] = useState(false)
   const [removing, setRemoving] = useState(false)
 
-  // @ts-expect-error - isDemo exists on user but not in session type
   const isDemo = session?.user?.isDemo
 
   if (!isDemo || dismissed) return null
