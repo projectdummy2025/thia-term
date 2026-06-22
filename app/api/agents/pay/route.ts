@@ -6,12 +6,11 @@ import { authOptions } from '@/lib/auth-config'
 import { prisma } from '@/lib/prisma'
 import { agentSendERC20, agentSendNative, deriveAgentWallet, fundAgentIfNeeded } from '@/lib/agent-wallet'
 import { logAudit } from '@/lib/audit'
-import { hspClient } from '@/lib/hsp-client'
 import { runComplianceCheck } from '@/lib/compliance'
 import { z } from 'zod'
 import crypto from 'crypto'
 
-// Token addresses on HashKey Chain mainnet
+// Legacy token addresses (retained for backward compatibility)
 const HASHKEY_TOKENS: Record<string, `0x${string}`> = {
   USDC: '0x8845E8C74cE5dF8E0d37bf0fe57dc5E0ddD8021b' as `0x${string}`,
   USDT: '0xF1B50eD67A9e2CC94Ad3c477779E2d4cBfFf9029' as `0x${string}`,
@@ -52,31 +51,6 @@ export async function POST(req: Request) {
     where: { id: agentId, userId },
   })
   if (!agent) return NextResponse.json({ error: 'Agent not found' }, { status: 404 })
-
-  // Ensure agent has an HSP Multi-Pay mandate (create once, reuse for all payments)
-  let hspMultipayMandateId = agent.hspMultipayMandateId ?? null
-  if (!hspMultipayMandateId && hspClient.isConfigured) {
-    try {
-      const appUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'
-      const mandate = await hspClient.createMultiPayMandate({
-        merchant_order_id: `agent-${agent.id}`,
-        description: `Thia-Term Agent: ${agent.name}`,
-        webhook_url: `${appUrl}/api/webhooks/hsp`,
-        redirect_url: `${appUrl}/dashboard`,
-      })
-      if (mandate?.data?.cart_mandate_id) {
-        hspMultipayMandateId = mandate.data.cart_mandate_id
-        await prisma.agent.update({
-          where: { id: agentId },
-          data: { hspMultipayMandateId },
-        })
-        console.log(`[HSP] Created multi-pay mandate ${hspMultipayMandateId} for agent ${agentId}`)
-      }
-    } catch (err) {
-      console.error('[HSP] Failed to create multi-pay mandate for agent:', err)
-      // Non-fatal — continue with on-chain payment
-    }
-  }
 
   // Resolve destination
   let destAddress: `0x${string}`
@@ -161,14 +135,12 @@ export async function POST(req: Request) {
       agentId,
       amount,
       token,
-      network: 'hashkey',
+      network: 't3n_testnet',
       txHash: txResult.txHash,
       status: 'completed',
       payerAddress,
       recipientAddress: destAddress,
-      memo: hspMultipayMandateId
-        ? `${memo || ''}${memo ? ' | ' : ''}hsp_mandate:${hspMultipayMandateId}`.trim()
-        : memo,
+      memo,
       paymentType,
       kycPassed: compliance.kycOk,
       sanctionsChecked: compliance.sanctionsOk,
@@ -187,19 +159,17 @@ export async function POST(req: Request) {
       amount,
       token,
       txHash: txResult.txHash,
-      hspMultipayMandateId: hspMultipayMandateId ?? undefined,
     },
   })
 
   return NextResponse.json({
     success: true,
     txHash: txResult.txHash,
-    txUrl: `https://hashkey.blockscout.com/tx/${txResult.txHash}`,
+    txUrl: `https://www.terminal3.io/usage`,
     payment,
-    hspMultipayMandateId: hspMultipayMandateId ?? null,
     message:
       paymentType === 'agent-to-agent'
-        ? `Agent paid ${destAgentName} ${amount} ${token} on HashKey Chain`
-        : `Agent paid ${destAddress.slice(0, 8)}... ${amount} ${token} on HashKey Chain`,
+        ? `Agent paid ${destAgentName} ${amount} ${token} via T3N`
+        : `Agent paid ${destAddress.slice(0, 8)}... ${amount} ${token} via T3N`,
   })
 }
