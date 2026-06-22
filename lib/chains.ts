@@ -82,57 +82,51 @@ export const SUPPORTED_CHAINS: SupportedChain[] = [
     ],
   },
   {
-    id: 133,
-    key: 'hashkey-testnet',
-    name: 'HashKey Testnet',
+    id: 0, // T3N is not a blockchain, but a TEE network
+    key: 't3n_testnet',
+    name: 'T3N Testnet',
     testnet: true,
-    explorerUrl: 'https://testnet.explorer.hsk.xyz',
-    nativeSymbol: 'HSK',
+    explorerUrl: 'https://www.terminal3.io/usage',
+    nativeSymbol: 'T3N',
     tokens: [
-      {
-        symbol: 'HSK',
-        name: 'HashKey Token (native)',
-        address: '',
-        decimals: 18,
-      },
       {
         symbol: 'USDC',
         name: 'USD Coin',
-        address: '0x47725537961326e4b906558BD208012c6C11aCa2',
+        address: '', // T3N handles token resolution internally
         decimals: 6,
       },
       {
         symbol: 'USDT',
         name: 'Tether USD',
-        address: '0x60EFCa24B785391C6063ba37fF917Ff0edEb9f4a',
+        address: '',
         decimals: 6,
+      },
+      {
+        symbol: 'HSK',
+        name: 'HashKey Token',
+        address: '',
+        decimals: 18,
       },
     ],
   },
   {
-    id: 177,
-    key: 'hashkey',
-    name: 'HashKey Chain',
+    id: 0,
+    key: 't3n',
+    name: 'T3N Production',
     testnet: false,
-    explorerUrl: 'https://hashkey.blockscout.com',
-    nativeSymbol: 'HSK',
+    explorerUrl: 'https://www.terminal3.io/usage',
+    nativeSymbol: 'T3N',
     tokens: [
-      {
-        symbol: 'HSK',
-        name: 'HashKey Token (native)',
-        address: '',
-        decimals: 18,
-      },
       {
         symbol: 'USDC',
         name: 'USD Coin',
-        address: '0x8845E8C74cE5dF8E0d37bf0fe57dc5E0ddD8021b',
+        address: '',
         decimals: 6,
       },
       {
         symbol: 'USDT',
         name: 'Tether USD',
-        address: '0xF1B50eD67A9e2CC94Ad3c477779E2d4cBfFf9029',
+        address: '',
         decimals: 6,
       },
     ],
@@ -156,4 +150,4 @@ export function isNativeToken(token: ChainToken): boolean {
 }
 
 // Default chain for new payment links
-export const DEFAULT_CHAIN_KEY = 'hashkey'
+export const DEFAULT_CHAIN_KEY = 't3n_testnet'
