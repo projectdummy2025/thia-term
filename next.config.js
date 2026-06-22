@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  serverExternalPackages: ["@terminal3/t3n-sdk", "@bytecodealliance/preview2-shim"],
   async headers() {
     return [
       {
