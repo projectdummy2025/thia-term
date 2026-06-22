@@ -12,6 +12,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { QrCode, Plus, Copy, Clock, Loader2, ExternalLink, Link2, Unlink, Share2, TrendingUp, Zap, CheckCircle } from "lucide-react"
 import { toast } from "sonner"
 import { cn } from "@/lib/utils"
+import { paymentLinkDummy } from "@/lib/demo-filler"
 
 interface PaymentLink {
   id: string
@@ -310,10 +311,11 @@ function LinkCard({ link, onCopy, onDeactivate, onDelete }: { link: PaymentLink;
 }
 
 function CreateLinkForm({ onSuccess }: { onSuccess: () => void }) {
-  const [name, setName] = useState('')
+  const __d = paymentLinkDummy()
+  const [name, setName] = useState(__d.name)
   const [token, setToken] = useState('HSK')
-  const [amountMin, setAmountMin] = useState('')
-  const [amountMax, setAmountMax] = useState('')
+  const [amountMin, setAmountMin] = useState(__d.amountMin)
+  const [amountMax, setAmountMax] = useState(__d.amountMax)
   const [loading, setLoading] = useState(false)
 
   const handleCreate = async () => {

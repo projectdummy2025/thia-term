@@ -29,6 +29,7 @@ import {
 import { toast } from "sonner"
 import { ruleTypeLabel, ruleTypeColor, ruleDescription } from "@/lib/agent-engine"
 import type { RuleType } from "@/lib/agent-engine"
+import { ruleDummy } from "@/lib/demo-filler"
 
 interface AgentRule {
   id: string
@@ -64,11 +65,12 @@ interface AddRuleModalProps {
 function AddRuleModal({ open, agents, onClose, onCreated }: AddRuleModalProps) {
   const [agentId, setAgentId] = useState(agents[0]?.id ?? "")
   const [type, setType] = useState<RuleType>("scheduled")
-  const [cron, setCron] = useState("0 9 * * 1")
-  const [action, setAction] = useState("send_invoice_reminder")
-  const [trigger, setTrigger] = useState("invoice_overdue")
-  const [condition, setCondition] = useState("days_overdue > 7")
-  const [stepCount, setStepCount] = useState("2")
+  const __r = ruleDummy()
+  const [cron, setCron] = useState(__r.cron)
+  const [action, setAction] = useState(__r.action)
+  const [trigger, setTrigger] = useState(__r.trigger)
+  const [condition, setCondition] = useState(__r.condition)
+  const [stepCount, setStepCount] = useState(__r.stepCount)
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {

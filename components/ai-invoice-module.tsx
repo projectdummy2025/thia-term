@@ -21,6 +21,7 @@ import {
 } from "lucide-react"
 import type { Invoice } from "@/app/api/invoices/route"
 import { SUPPORTED_CHAINS, DEFAULT_CHAIN_KEY } from "@/lib/chains"
+import { invoiceDummy, agentDummy } from "@/lib/demo-filler"
 
 const CHAINS = SUPPORTED_CHAINS
 
@@ -61,18 +62,21 @@ interface LineItem {
 
 const emptyLineItem = (): LineItem => ({ description: "", quantity: 1, unitPrice: "", total: "0.00" })
 
-const defaultForm = () => ({
-  issuedTo: "",
-  issuedToAddress: "",
-  description: "",
-  currency: "HSK",
-  network: DEFAULT_CHAIN_KEY,
-  dueAt: "",
-  kycRequired: true,
-  selectedAgentId: "",
-  agentName: "",
-  agentDescription: "",
-})
+const defaultForm = () => {
+  const __d = invoiceDummy()
+  return {
+    issuedTo: __d.issuedTo,
+    issuedToAddress: __d.issuedToAddress,
+    description: __d.description,
+    currency: __d.currency,
+    network: __d.network,
+    dueAt: __d.dueAt,
+    kycRequired: __d.kycRequired,
+    selectedAgentId: "",
+    agentName: "",
+    agentDescription: "",
+  }
+}
 
 // ─── Create Invoice Dialog ─────────────────────────────────────────────────
 
@@ -85,7 +89,8 @@ function CreateInvoiceDialog({
   onCreated: (link: string | null) => void
 }) {
   const [form, setForm] = useState(defaultForm())
-  const [lineItems, setLineItems] = useState<LineItem[]>([emptyLineItem()])
+  const __dummyLines = invoiceDummy().lineItems as LineItem[]
+  const [lineItems, setLineItems] = useState<LineItem[]>(__dummyLines)
   const [loading, setLoading] = useState(false)
 
   const updateLineItem = (idx: number, field: keyof LineItem, value: string | number) => {
@@ -424,7 +429,8 @@ export function AIInvoiceModule() {
   const [filterStatus, setFilterStatus] = useState("all")
   const [confirmVoidId, setConfirmVoidId] = useState<string | null>(null)
   const [agentLoading, setAgentLoading] = useState(false)
-  const [agentForm, setAgentForm] = useState({ name: "", description: "", walletAddress: "", capabilitiesText: "" })
+  const __aDummy = agentDummy()
+  const [agentForm, setAgentForm] = useState({ name: __aDummy.name, description: __aDummy.description, walletAddress: __aDummy.walletAddress, capabilitiesText: __aDummy.capabilitiesText })
 
   useEffect(() => { fetchInvoices(); fetchAgents() }, [filterStatus])
 
@@ -450,7 +456,12 @@ export function AIInvoiceModule() {
       body: JSON.stringify({ name: agentForm.name, description: agentForm.description || null, walletAddress: agentForm.walletAddress || null, capabilities }),
     })
     const data = await res.json()
-    if (data.success) { setShowRegisterAgent(false); setAgentForm({ name: "", description: "", walletAddress: "", capabilitiesText: "" }); fetchAgents() }
+    if (data.success) {
+      setShowRegisterAgent(false)
+      const __a2 = agentDummy()
+      setAgentForm({ name: __a2.name, description: __a2.description, walletAddress: __a2.walletAddress, capabilitiesText: __a2.capabilitiesText })
+      fetchAgents()
+    }
     setAgentLoading(false)
   }
 

@@ -8,19 +8,21 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { cn } from "@/lib/utils"
+import { agentPaymentDummy } from "@/lib/demo-filler"
 
 interface AgentPaymentWidgetProps {
   agents: { id: string; name: string; walletAddress?: string | null }[]
 }
 
 export function AgentPaymentWidget({ agents }: AgentPaymentWidgetProps) {
-  const [fromAgent, setFromAgent] = useState('')
+  const [fromAgent, setFromAgent] = useState(agents?.[0]?.id ?? '')
+  const __d = fromAgent ? agentPaymentDummy(fromAgent) : null
   const [toType, setToType] = useState<'human' | 'agent'>('human')
   const [toAddress, setToAddress] = useState('')
   const [toAgent, setToAgent] = useState('')
-  const [amount, setAmount] = useState('')
-  const [token, setToken] = useState('HSK')
-  const [memo, setMemo] = useState('')
+  const [amount, setAmount] = useState(__d?.amount ?? '')
+  const [token, setToken] = useState(__d?.token ?? 'HSK')
+  const [memo, setMemo] = useState(__d?.memo ?? '')
   const [loading, setLoading] = useState(false)
   const [result, setResult] = useState<{ txHash: string; txUrl: string } | null>(null)
   const [error, setError] = useState('')

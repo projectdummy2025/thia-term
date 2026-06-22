@@ -7,7 +7,7 @@ import {
   eth_get_address,
   metamask_sign,
   getNodeUrl,
-  getScriptVersion,
+  getScriptVersion as t3nGetScriptVersion,
   type WasmComponent,
 } from "@terminal3/t3n-sdk"
 
@@ -64,4 +64,21 @@ export async function destroyT3nSession(): Promise<void> {
   tenantDid = null
 }
 
-export { getScriptVersion, getNodeUrl }
+export { getNodeUrl }
+
+/**
+ * Wraps T3N's getScriptVersion to sanitize the version string into valid semver.
+ * T3N testnet sometimes returns `0.1.<timestamp>` where the patch is a full
+ * epoch millisecond (e.g. `0.1.1781951928847`) — not valid semver (max 9 digits).
+ */
+export async function getScriptVersion(nodeUrl: string, scriptName: string): Promise<string> {
+  const raw = await t3nGetScriptVersion(nodeUrl, scriptName)
+  // Sanitize to valid semver: split on '.', clamp each numeric part to valid range
+  const parts = raw.split('.').map(p => {
+    const n = parseInt(p, 10)
+    if (isNaN(n)) return p
+    // semver versions are uint32 max 2147483647 — clamp
+    return String(Math.min(n, 2147483647))
+  })
+  return parts.join('.')
+}

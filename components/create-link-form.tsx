@@ -10,14 +10,16 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Copy, Plus } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
 import { SUPPORTED_CHAINS, DEFAULT_CHAIN_KEY } from "@/lib/chains"
+import { paymentLinkDummy } from "@/lib/demo-filler"
 
 const CHAINS = SUPPORTED_CHAINS
 
 export function CreateLinkForm({ onSuccess }: { onSuccess?: () => void } = {}) {
   const [network, setNetwork] = useState(DEFAULT_CHAIN_KEY)
   const [sourceToken, setSourceToken] = useState(CHAINS.find(c => c.key === DEFAULT_CHAIN_KEY)?.tokens[0]?.symbol ?? 'HSK')
-  const [amount, setAmount] = useState("")
-  const [memo, setMemo] = useState("")
+  const __dummy = paymentLinkDummy()
+  const [amount, setAmount] = useState(__dummy.amountMin)
+  const [memo, setMemo] = useState(__dummy.name)
   const [generatedLink, setGeneratedLink] = useState("")
   const [isCreating, setIsCreating] = useState(false)
   const { toast } = useToast()

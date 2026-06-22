@@ -52,6 +52,7 @@ import { SUPPORTED_CHAINS, DEFAULT_CHAIN_KEY } from "@/lib/chains"
 import { toast } from "sonner"
 import { AgentRulesWidget } from "@/components/agent-rules-widget"
 import { cn } from "@/lib/utils"
+import { invoiceDummy, agentDummy } from "@/lib/demo-filler"
 
 // All chains (including testnet for hackathon)
 const CHAINS = SUPPORTED_CHAINS
@@ -99,20 +100,21 @@ interface CreateInvoiceModalProps {
 function CreateInvoiceModal({ open, onClose, onCreated, agents }: CreateInvoiceModalProps) {
   const today = new Date().toISOString().split("T")[0]
   const defaultDue = new Date(Date.now() + 14 * 86400000).toISOString().split("T")[0]
+  const __dummy = invoiceDummy()
 
   const [step, setStep] = useState<1 | 2 | 3>(1)
   const [loading, setLoading] = useState(false)
 
   // Form fields
-  const [recipientName, setRecipientName] = useState("")
-  const [recipientEmail, setRecipientEmail] = useState("")
+  const [recipientName, setRecipientName] = useState(__dummy.recipientName)
+  const [recipientEmail, setRecipientEmail] = useState(__dummy.recipientEmail)
   const [invoiceNumber, setInvoiceNumber] = useState("")
   const [issueDate, setIssueDate] = useState(today)
-  const [dueDate, setDueDate] = useState(defaultDue)
-  const [currency, setCurrency] = useState("USDC")
-  const [network, setNetwork] = useState(DEFAULT_CHAIN_KEY)
-  const [notes, setNotes] = useState("")
-  const [lineItems, setLineItems] = useState<LineItem[]>([emptyLineItem()])
+  const [dueDate, setDueDate] = useState(__dummy.dueAt)
+  const [currency, setCurrency] = useState(__dummy.currency)
+  const [network, setNetwork] = useState(__dummy.network)
+  const [notes, setNotes] = useState(__dummy.notes)
+  const [lineItems, setLineItems] = useState<LineItem[]>(__dummy.lineItems as LineItem[])
   const [saveDraft, setSaveDraft] = useState(false)
 
   // Fetch next invoice number on open
@@ -752,7 +754,8 @@ interface RegisterAgentModalProps {
 
 function RegisterAgentModal({ open, onClose, onCreated }: RegisterAgentModalProps) {
   const [loading, setLoading] = useState(false)
-  const [form, setForm] = useState({ name: "", description: "", walletAddress: "", capabilitiesText: "" })
+  const __dummy = agentDummy()
+  const [form, setForm] = useState({ name: __dummy.name, description: __dummy.description, walletAddress: __dummy.walletAddress, capabilitiesText: __dummy.capabilitiesText })
 
   const handleSubmit = async () => {
     setLoading(true)

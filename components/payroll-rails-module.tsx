@@ -38,6 +38,7 @@ import {
   Loader2,
 } from "lucide-react"
 import { toast } from "sonner"
+import { payrollDummy } from "@/lib/demo-filler"
 
 async function exportPayrollCsv(setExporting: (v: boolean) => void) {
   setExporting(true)
@@ -451,8 +452,9 @@ function PayrollBatchCard({
 }
 
 function CreatePayrollBatchForm({ onClose, onSuccess }: { onClose: () => void; onSuccess: () => void }) {
-  const [batchName, setBatchName] = useState("")
-  const [selectedCurrency, setSelectedCurrency] = useState("USDC")
+  const __d = payrollDummy()
+  const [batchName, setBatchName] = useState(__d.name)
+  const [selectedCurrency, setSelectedCurrency] = useState(__d.currency)
   const [saving, setSaving] = useState(false)
 
   const handleCreate = async () => {
