@@ -122,9 +122,18 @@ export async function POST(request: NextRequest) {
   const body = parsed.data
   const amount = body.amount ?? body.subtotal ?? 0
 
-  const count = await prisma.invoice.count({ where: { userId } })
-  const year = new Date().getFullYear()
-  const invoiceNumber = body.invoiceNumber || `FL-${year}-${String(count + 1).padStart(3, "0")}`
+  // Generate unique invoice number (global unique constraint — retry on collision)
+  let invoiceNumber = body.invoiceNumber || ''
+  if (!invoiceNumber) {
+    const year = new Date().getFullYear()
+    for (let attempt = 0; attempt < 5; attempt++) {
+      const count = await prisma.invoice.count({ where: { userId } })
+      const seq = String(count + 1 + attempt).padStart(3, '0')
+      invoiceNumber = `FL-${year}-${seq}`
+      const dup = await prisma.invoice.findUnique({ where: { invoiceNumber } })
+      if (!dup) break
+    }
+  }
 
   // Resolve recipient wallet for payment link creation
   // For human invoices the recipient address is the person paying (payer), so the
@@ -155,27 +164,39 @@ export async function POST(request: NextRequest) {
   const subtotal = body.subtotal ?? body.amount ?? 0
   const status = body.status || 'pending'
 
-  const invoice = await prisma.invoice.create({
-    data: {
-      userId,
-      invoiceNumber,
-      agentId: body.agentId || null,
-      agentName,
-      issuedTo: body.issuedTo || body.recipientName || null,
-      issuedToAddress: body.issuedToAddress || body.recipientEmail || null,
-      amount,
-      subtotal,
-      currency,
-      network,
-      status,
-      description: body.description || null,
-      notes: body.notes || null,
-      lineItems,
-      issueDate: body.issueDate ? new Date(body.issueDate) : new Date(),
-      dueAt: body.dueAt ? new Date(body.dueAt) : new Date(Date.now() + 14 * 86400000),
-      complianceStatus: 'pending',
-    },
-  })
+  // Create invoice with retry loop for global PK collision (invoiceNumber unique)
+  let invoice
+  for (let attempt = 0; attempt < 5; attempt++) {
+    try {
+      invoice = await prisma.invoice.create({
+        data: {
+          userId,
+          invoiceNumber,
+          agentId: body.agentId || null,
+          agentName,
+          issuedTo: body.issuedTo || body.recipientName || null,
+          issuedToAddress: body.issuedToAddress || body.recipientEmail || null,
+          amount,
+          subtotal,
+          currency,
+          network,
+          status,
+          description: body.description || null,
+          notes: body.notes || null,
+          lineItems,
+          issueDate: body.issueDate ? new Date(body.issueDate) : new Date(),
+          dueAt: body.dueAt ? new Date(body.dueAt) : new Date(Date.now() + 14 * 86400000),
+          complianceStatus: 'pending',
+        },
+      })
+      break
+    } catch (err: unknown) {
+      if ((err as { code?: string }).code !== 'P2002' || attempt === 4) throw err
+      // P2002 — invoiceNumber collision, regenerate
+      const seq = String(Number(invoiceNumber.split('-').pop() || '0') + 1).padStart(3, '0')
+      invoiceNumber = `FL-${new Date().getFullYear()}-${seq}`
+    }
+  }
 
   // Auto-create a payment link if we have a recipient address and invoice is being sent
   let paymentLinkCode: string | null = null
