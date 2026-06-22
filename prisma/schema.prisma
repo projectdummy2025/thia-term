@@ -22,6 +22,7 @@ model User {
   encryptedMnemonic   String?
   encryptedPrivateKey String?
   walletType          String?
+  isDemo              Boolean           @default(false)
   accounts            Account[]
   agents              Agent[]
   auditLogs           AuditLog[]
