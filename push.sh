@@ -105,6 +105,8 @@ if [ "$COUNT" -gt 0 ] || [ "$LOCAL_AHEAD" -gt 0 ]; then
     if [ "$LOCAL_AHEAD" -gt 0 ]; then
         echo "📤 Local branch is ahead by $LOCAL_AHEAD commit(s)."
     fi
+    echo "📤 Pulling latest from origin/$BRANCH..."
+    git pull --rebase origin "$BRANCH" 2>/dev/null || true
     echo "📤 Pushing to origin/$BRANCH..."
     if git push origin "$BRANCH"; then
         echo "=========================================="
@@ -112,7 +114,8 @@ if [ "$COUNT" -gt 0 ] || [ "$LOCAL_AHEAD" -gt 0 ]; then
         echo "=========================================="
     else
         echo "=========================================="
-        echo "❌ Push failed!"
+        echo "❌ Push failed! Remote has changes you need to resolve manually."
+        echo "   Try: git pull --rebase origin $BRANCH"
         echo "=========================================="
         exit 1
     fi
